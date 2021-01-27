@@ -4,13 +4,15 @@ module.exports = {
     execute(message, args, Discord) {
         if (message.member.roles.cache.some(r => r.name === "king")) {
             const target = message.mentions.users.first();
+            message.channel.send(target);
             if (target) {
-                target.users.kick();
+                const memberTarget = message.guild.members.cache.get(target.id);
+                memberTarget.kick();
 
                 const embedMsg = new Discord.MessageEmbed()
                     .setColor('#ff0000')
-                    .setTitle('Muted:')
-                    .setDescription(`<@${memberTarget.user.id}> has been muted`)
+                    .setTitle('Kicked:')
+                    .setDescription(`<@${memberTarget.user.id}> has been kicked`)
                     .addFields(
                         { name: 'Reason:', value: `${args[1]}` }
 
