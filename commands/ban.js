@@ -1,4 +1,4 @@
-module.exports = {
+/*module.exports = {
     name: 'mute',
     description: "This is ping command",
     execute(message, args, Discord) {
@@ -31,4 +31,4 @@ module.exports = {
             message.reply('you have no permission');
         }
     }
-}
+}*/

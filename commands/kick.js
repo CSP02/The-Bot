@@ -1,17 +1,12 @@
 module.exports = {
-    name: 'mute',
-    description: "This is ping command",
+    name: 'kick',
+    description: "kick command",
     execute(message, args, Discord) {
         if (message.member.roles.cache.some(r => r.name === "king")) {
             const target = message.mentions.users.first();
             if (target) {
-                let mainRole = message.guild.roles.cache.find(role => role.name === 'member');
-                let mutedRole = message.guild.roles.cache.find(role => role.name === 'Muted');
+                target.users.kick();
 
-                memberTarget = message.guild.members.cache.get(target.id);
-
-                memberTarget.roles.remove(mainRole.id);
-                memberTarget.roles.add(mutedRole.id);
                 const embedMsg = new Discord.MessageEmbed()
                     .setColor('#ff0000')
                     .setTitle('Muted:')

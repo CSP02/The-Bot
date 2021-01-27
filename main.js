@@ -47,6 +47,9 @@ client.on('message', message => {
     else if(command === 'unmute'){
         client.command.get('unmute').execute(message, args);
     }
+    else if(command === 'kick'){
+        client.command.get('kick').execute(message, args, Discord);
+    }
     else{
         message.channel.send('No such command exist till now');
     }
