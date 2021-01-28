@@ -60,4 +60,4 @@ client.on('message', message => {
         message.channel.send('No such command exist till now');
     }
 });
-client.login('ODAzNDkwMTM3MDIyNzkxNjgw.YA-igA.FhKJZG6Rp08cpPxa__r6BwQ9PKo');
+client.login('ODAzNDkwMTM3MDIyNzkxNjgw.YA-igA.S04ApvE5MrEXfw01HVrt47-WGQY');
