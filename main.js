@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+require('dotenv').config();
 
 const client = new Discord.Client();
 
@@ -60,4 +61,4 @@ client.on('message', message => {
         message.channel.send('No such command exist till now');
     }
 });
-client.login('ODAzNDkwMTM3MDIyNzkxNjgw.YA-igA.Qs-EMeRegk57Q5ldq2QkWIMYa7Q');
+client.login(process.env.Token);
