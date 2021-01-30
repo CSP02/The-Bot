@@ -1,7 +1,7 @@
 module.exports = {
     name: 'mute',
     description: "This is ping command",
-    execute(message, args, Discord) {
+    execute(client, message, args, Discord) {
         if (message.member.roles.cache.some(r => r.name === "king")) {
             const target = message.mentions.users.first();
             if (target) {

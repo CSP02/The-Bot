@@ -1,7 +1,7 @@
-/*module.exports = {
-    name: 'mute',
+module.exports = {
+    name: 'ban',
     description: "This is ping command",
-    execute(message, args, Discord) {
+    execute(client, message, args, Discord) {
         if (message.member.roles.cache.some(r => r.name === "king")) {
             const target = message.mentions.users.first();
             if (target) {
@@ -14,14 +14,13 @@
                 memberTarget.roles.add(mutedRole.id);
                 const embedMsg = new Discord.MessageEmbed()
                     .setColor('#ff0000')
-                    .setTitle('Muted:')
-                    .setDescription(`<@${memberTarget.user.id}> has been muted`)
+                    .setTitle('Banned:')
+                    .setDescription(`<@${memberTarget.user.id}> has been banned`)
                     .addFields(
                         { name: 'Reason:', value: `${args[1]}` }
 
                     )
-                message.channel.send(embedMsg);
-                //message.channel.send(`<@${memberTarget.user.id}> has been muted`);
+                message.channel.send(embedMsg);;
             }
             else {
                 message.channel.send('cant find that member');
@@ -31,4 +30,4 @@
             message.reply('you have no permission');
         }
     }
-}*/
+}

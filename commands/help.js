@@ -1,15 +1,14 @@
 module.exports = {
-    name: 'embed',
+    name: 'help',
     description: "This is ping command",
     execute(client, message, args, Discord) {
         const embedMsg = new Discord.MessageEmbed()
-            .setColor('#66ff66')
-            .setTitle('rules')
-            .setDescription('this is the embed to this bot')
+            .setColor('#00ff00')
+            .setTitle('Help')
             .addFields(
-                { name: 'Name:', value: 'The bot' }
-
-            )
+                { name: 'Roles:', value: 'member' },
+                { name: 'Ping:', value: 'Pong' },
+                 )
             .setFooter('make sure to check the rules before messaging');
         message.channel.send(embedMsg);
     }

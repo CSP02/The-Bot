@@ -1,7 +1,7 @@
 module.exports = {
     name: 'role',
     description: "This is ping command",
-    execute(message, args){
+    execute(client, message, args){
         if(message.member.roles.cache.some(r => r.name === "king")){
             message.channel.send('you already has the king role');
         } 
