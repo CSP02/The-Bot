@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'role',
-	description: 'This is ping command',
+	description: 'This command will give you the roles.',
 	execute(client, message, args, Discord) {
 		if (args[0]) {
 				 if((args[0] ===  'mod' || args[0] ===  'admin') && message.member.roles.cache.some(r => r.name === 'admin')){				
