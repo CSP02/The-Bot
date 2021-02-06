@@ -22,6 +22,15 @@ mute | Mutes the mentioned member | @mod, @admin
 clear | Clears the given number of messages including the bot's message | @mods, @admins
 unmute | unmutes the mentioned member | @mods, @admins
 
+```
+Example:
+
+You:
+!ping
+The bot:
+Present heartbeat of the bot is 42ms.
+```
+
 #### Reference:
 The tutorial on discord bot dev using discord.js by 
 [CodeLyon](https://youtube.com/playlist?list=PLbbLC0BLaGjpyzN1rg-gK4dUqbn8eJQq4)
