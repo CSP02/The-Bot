@@ -1,6 +1,6 @@
 module.exports = {
     name: 'userinfo',
-    description: "This is ping command",
+    description: "This command will give the information about mentioned user",
     execute(client, message, args, Discord) {
       let mentioned = message.mentions.users.first();
       if(!mentioned){
