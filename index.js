@@ -12,4 +12,4 @@ client.events = new Discord.Collection();
 })
 
 keepAlive;
-client.login(process.env.TOKEN);
+client.login();
