@@ -8,7 +8,7 @@ The default role "member" will be added when someone joins the server. So make s
 
 Use !help to get the commands you can use.
 
-Present commands:
+**Present commands**:
 
 Command |    Task    | Permission
 ------- |    ----    | ----------
