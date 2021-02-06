@@ -1,7 +1,7 @@
 const ms = require('ms');
 module.exports = {
   name: 'mute',
-  description: 'This is ping command',
+  description: 'This command will mute the mentioned user for the given time.',
   execute(client, message, args, Discord) {
     const mess_kingRole = message.member.roles.cache.some(r => r.name === 'admin');
     const mess_modRole = message.member.roles.cache.some(r => r.name === 'mod');
