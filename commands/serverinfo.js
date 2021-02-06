@@ -2,7 +2,7 @@ module.exports = {
 
     name: 'serverinfo',
 
-    description: "This is ping command",
+    description: "This command will display the server info.",
 
     execute(client, message, args, Discord){
 
