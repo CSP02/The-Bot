@@ -10,15 +10,15 @@ Use !help to get the commands you can use.
 
 Present commands:
 
-1. !kick (member)
+> 1. !kick (member)
 
     This command will kick the mentioned member.
 
-2. !ban (member)
+> 2. !ban (member)
   
     This command will ban the mentioned member.
     
-3. !mute (member) (period) (reason)
+> 3. !mute (member) (period) (reason)
 
     This command will mute the mentioned member.
     
@@ -28,6 +28,6 @@ Present commands:
     
     (reason) : Optional;
     
-4. !help
+> 4. !help
     
     This will display the commands you can use using this bot.
