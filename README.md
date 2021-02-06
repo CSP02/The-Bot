@@ -23,6 +23,7 @@ clear | Clears the given number of messages including the bot's message | @mods,
 unmute | unmutes the mentioned member | @mods, @admins
 
 ```
+Javascript
 Example:
 
 You:
