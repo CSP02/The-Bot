@@ -30,6 +30,9 @@ You:
 The bot:
 Present heartbeat of the bot is 42ms.
 ```
+#### License:
+
+This project is licensed under a MIT license.
 
 #### Reference:
 The tutorial on discord bot dev using discord.js by 
