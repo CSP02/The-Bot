@@ -22,7 +22,7 @@ mute | Mutes the mentioned member | @mod, @admin
 clear | Clears the given number of messages including the bot's message | @mods, @admins
 unmute | unmutes the mentioned member | @mods, @admins
 
-```Javascript
+```
 Example:
 
 You:
