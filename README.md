@@ -23,4 +23,4 @@ clear | Clears the given number of messages including the bot's message | @mods,
 unmute | unmutes the mentioned member | @mods, @admins
 
 #### Reference:
-The tutorial on discord bot dev using discord.js by [https://youtube.com/playlist?list=PLbbLC0BLaGjpyzN1rg-gK4dUqbn8eJQq4] CodeLyon. 
+The tutorial on discord bot dev using discord.js by [CodeLyon] (https://youtube.com/playlist?list=PLbbLC0BLaGjpyzN1rg-gK4dUqbn8eJQq4). 
