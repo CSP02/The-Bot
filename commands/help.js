@@ -2,7 +2,7 @@ module.exports = {
 
     name: 'help',
 
-    description: "This is ping command",
+    description: "This command will display what this bot can do",
 
     execute(client, message, args, Discord) {
 
