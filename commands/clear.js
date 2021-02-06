@@ -1,6 +1,6 @@
 module.exports = {
     name: 'clear',
-    description: "This is ping command",
+    description: "This command will clear or delete the number of messages given",
     async execute(client, message, args, Discord){
         if(message.member.roles.cache.some(r => r.name === "king"))
         {
