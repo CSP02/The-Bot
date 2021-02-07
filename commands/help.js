@@ -16,11 +16,11 @@ module.exports = {
 
                 { name: 'Roles(not the command):', value: 'cg artist\nGamers\nGame devs' },
 
-                {name: 'userinfo', value: 'Displays the userinfo of the messaged member'},
+                { name: 'userinfo', value: 'Displays the userinfo of the messaged member' },
 
-                {name: 'serverinfo', value: 'Displays the brief info of the server'},
+                { name: 'serverinfo', value: 'Displays the brief info of the server' },
 
-                
+
 
                 { name: 'Ping:', value: 'Shows the hearth beat of the bot.' },
 
@@ -30,9 +30,9 @@ module.exports = {
 
                 { name: 'ban:', value: 'bans the mentioned member.' },
 
-                { name: 'unmute', value: 'unmutes the mentioned member'}
+                { name: 'unmute', value: 'unmutes the mentioned member' }
 
-                 )
+            )
 
             .setFooter('Make sure to check the rules before messaging.\nAlso note that mute, ban, unmute, kick commands were only used by the moderator or the admins.');
 
