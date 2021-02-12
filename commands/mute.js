@@ -13,7 +13,7 @@ module.exports = {
         let mutedRole = message.guild.roles.cache.find(role => role.name === 'Muted');
 
         memberTarget = message.guild.members.cache.get(target.id);
-        if (memberTarget.hasPermission('MUTE_MEMBERS')) { message.channel.send('Be a good mod.'); }
+        if (memberTarget.hasPermission('MUTE_MEMBERS') && !message.member.hasPermission('ADMINISTRATOR')) { message.channel.send('Be a good mod.'); }
         else {
           if (!args[1]) {
             message.reply('Specify the time')
@@ -23,6 +23,8 @@ module.exports = {
           else {
             memberTarget.roles.remove(mainRole.id);
             memberTarget.roles.add(mutedRole.id);
+
+
             setTimeout(function () {
               memberTarget.roles.remove(mutedRole.id);
               memberTarget.roles.add(mainRole.id);
