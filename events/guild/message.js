@@ -1,28 +1,22 @@
 module.exports = (Discord, client, message) => {
     const prefix = '!';
 
-    const words = ["fuck",
-        "bitch",
-        "nigga",
-        "nigger",
-        "retarted",
-        "Fuck",
-        "Bitch",
-        "Nigga",
-        "Nigger",
-        "Retarted"
+    const words = [
+        //all the cuss words here with a comma
+
     ]
 
     if (!message.content.startsWith(prefix) || message.author.bot) {
         for (const curseWords of words) {
-
-            if (message.content.includes(curseWords)) {
+            if (message.content.toLowerCase().includes(curseWords)) {
                 curseMsg = message.fetch(message.id)
-                message.delete(curseMsg)
-                message.channel.send("Message deleted")
-                message.reply("Please don't use the curse words unless you want to get **muted** or **banned**");
-
-                return;
+                if (curseMsg) {
+                    message.delete(curseMsg)
+                    message.reply("Message deleted,\nPlease don't use the those words unless you want to get **muted** or **banned**");
+                }
+                else {
+                    return;
+                }
             } else {
                 continue;
             }
