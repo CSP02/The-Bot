@@ -1,5 +1,5 @@
 module.exports = (Discord, client, message) => {
-    const prefix = '!';
+    const prefix = 'prefix';
 
     const words = [
         //all the cuss words here with a comma

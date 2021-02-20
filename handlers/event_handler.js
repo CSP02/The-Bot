@@ -10,21 +10,6 @@ module.exports = (client, Discord) => {
             const event = require(`../events/${dir}/${file}`);
             const event_name = file.split('.')[0];
             client.on(event_name, event.bind(null, Discord, client));
-
-
-            client.on('ready', () => {
-                client.user.setActivity("Helping\n(!help)", {
-                    type: "PLAYING",
-                })
-            });
-
-            client.on('guildMemberAdd', guildMember => {
-                let welcomeRole = guildMember.guild.roles.cache.find(
-                    role => role.name === 'member'
-                );
-
-                guildMember.roles.add(welcomeRole);
-            })
         }
     };
 
