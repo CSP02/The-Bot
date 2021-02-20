@@ -12,10 +12,10 @@
 
 Command |  Alias   |    Task    | Permission
 ------- |  -----   |    ----    | ----------
-help | help | Displays the commands you can use | @everyone
+help | - | Displays the commands you can use | @everyone
 serverinfo | si | Displays the information about the server | @everyone
 userinfo | ui | Displays the information of mentioned user if not mentioned Displays the info about you | @everyone
-ping | ping | Displays the current speed or latency of the bot | @everyone
+ping | - | Displays the current speed or latency of the bot | @everyone
 github | gh | Sends a link of this Bot's repository | @everyone
 kick | - | Kicks the mentioned member | @mods, @admin
 ban | - | Banes the mentioned member | @mods, @admin
