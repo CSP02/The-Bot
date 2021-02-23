@@ -14,7 +14,7 @@ module.exports = {
 
             .addFields(
 
-                { name: 'Roles(not the command):', value: 'cg artist\nGamers\nGame devs' },
+                { name: 'Roles(not the command):', value: 'cg artist\nGamers\nGame devs\nmember is the default role.' },
 
                 { name: 'userinfo', value: 'Displays the userinfo of the messaged member' },
 
