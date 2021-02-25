@@ -4,8 +4,6 @@ module.exports = {
     execute(client, message, args, Discord) {
 
         const sLogsChannel = client.channels.cache.get('811997907473268788')
-        const taLogsChannel = client.channels.cache.get('810141713205035019')
-        const server = message.guild
 
 
         if (message.member.hasPermission('BAN_MEMBERS')) {
@@ -32,12 +30,7 @@ module.exports = {
                         message.channel.send(embedMsg);
                         memberTarget.send(`You were banned from the server:\n**${message.guild.name}**.\n Because:\n **${args.slice(2).join(" ")}**. Take care.`)
 
-                        if (server.id === '801451603860258861') {
-
-                            sLogsChannel.send(`${memberTarget} has been muted.`)
-                        } else if (server.id === '795133444610457640') {
-                            taLogsChannel.send(`${memberTarget} has been  muted.`)
-                        }
+                        sLogsChannel.send(`${memberTarget} was banned from this server.`)
                     }
                 }
             }
