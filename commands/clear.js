@@ -1,22 +1,15 @@
 module.exports = {
     name: 'clear',
-    description: 'clear command',
     async execute(client, message, args, Discord) {
         if (message.member.hasPermission('MANAGE_MESSAGES')) {
-
             const target = message.mentions.users.first();
-            const messages = message.channel.messages.fetch({ limit: args[1] })
-            
+
             if (target) {
-                if (!args[1]) return message.reply("please enter the number of messages you want to clear");
+                const messages = message.channel.messages.fetch();
+                const userMessage = (await messages).filter((m) => m.author.id === target.id, { max: args[1] });
+                //const specifiedMessages = (await userMessage).filter({limit: args[1]})
+                await message.channel.bulkDelete(userMessage).then(console.log(`messages of ${target} were deleted`))
 
-                if (isNaN(args[1])) return message.reply('please enter a real number');
-
-                if (args[1] > 100) return message.reply('you cannot');
-                if (args[1] < 1) return message.reply('you cant time travel');
-
-                const userMessage = (await messages).filter(m => m.author.id === message.author.id);
-                await message.channel.bulkDelete(userMessage)
 
             } else {
                 if (!args[0]) return message.reply("please enter the number of messages you want to clear");
