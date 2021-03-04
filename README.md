@@ -17,7 +17,7 @@ serverinfo | si | Displays the information about the server | @everyone
 userinfo | ui | Displays the information of mentioned user if not mentioned Displays the info about you | @everyone
 ping | - | Displays the current speed or latency of the bot | @everyone
 github | gh | Sends a link of this Bot's repository | @everyone
-role | - | assigns the given role
+role | - | assigns the given role | @everyone
 kick | - | Kicks the mentioned member | @mods, @admin
 ban | - | Banes the mentioned member | @mods, @admin
 mute | - | Mutes the mentioned member | @mod, @admin
