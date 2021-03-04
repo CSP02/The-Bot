@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\commands"
   ],
-  "SelectedNode": "\\index.js",
+  "SelectedNode": "\\commands\\ban.js",
   "PreviewInSolutionExplorer": false
 }
