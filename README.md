@@ -24,7 +24,7 @@ mute | - | Mutes the mentioned member | @mod, @admin
 clear | - | Clears the given number of messages including the bot's message | @mods, @admins
 unmute | - | unmutes the mentioned member | @mods, @admins
 warn | - | warns the mentioned member | @mods, @admins
-warns | list-warns, 'lstwarns, lw | replies with the warns of the mentioned member | @mods, @admins
+warns | list-warns, lstwarns, lw | replies with the warns of the mentioned member | @mods, @admins
 list-warns-by | lwby, lstwarnsby | replies with the warnes made by the mentioned member(mods and admins) | @mods, @admins
 
 
