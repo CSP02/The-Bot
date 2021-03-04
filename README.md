@@ -44,5 +44,8 @@ This project is licensed under a MIT license.
 The tutorial on discord bot dev using discord.js by 
 [CodeLyon](https://youtube.com/playlist?list=PLbbLC0BLaGjpyzN1rg-gK4dUqbn8eJQq4)
 
+Followed tutorial by [Worn off keys](https://youtu.be/mHKbU8nOW58) to implement a warn system through database (mongodb).
+
+### Join Us:
 You can also join my discord server. Its all about helping people in development. Like modelling using blender, unity game dev, programming, unreal, and also some pc stuff you can try. Here is the link for my server and if like join it and also share with your friends who are seeking help or learining something.
 [The Atelier discord server](https://discord.gg/6Mcy5NpSpH)
