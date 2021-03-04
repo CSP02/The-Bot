@@ -24,7 +24,7 @@ mute | - | Mutes the mentioned member | @mod, @admin
 clear | - | Clears the given number of messages including the bot's message | @mods, @admins
 unmute | - | unmutes the mentioned member | @mods, @admins
 warn | - | warns the mentioned member | @mods, @admins
-warns | list-warns, 'lstwarns, lw | replies with the warns of the mentioned member | @mods, @admins
+warns | list-warns, lstwarns, lw | replies with the warns of the mentioned member | @mods, @admins
 list-warns-by | lwby, lstwarnsby | replies with the warnes made by the mentioned member(mods and admins) | @mods, @admins
 
 
@@ -47,5 +47,5 @@ The tutorial on discord bot dev using discord.js by
 Followed tutorial by [Worn off keys](https://youtu.be/mHKbU8nOW58) to implement a warn system through database (mongodb).
 
 ### Join Us:
-You can also join my discord server. Its all about helping people in development. Like modelling using blender, unity game dev, programming, unreal, and also some pc stuff you can try. Here is the link for my server and if like join it and also share with your friends who are seeking help or learining something.
+You can also join my discord server. Its all about helping people in development. Like modelling using blender, unity game dev, programming, unreal, and also some pc stuff you can try. Here is the link for my server and if you like, join it and also share with your friends who are seeking help or learining something.
 [The Atelier discord server](https://discord.gg/6Mcy5NpSpH)
