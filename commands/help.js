@@ -30,7 +30,13 @@ module.exports = {
 
                 { name: 'ban:', value: 'bans the mentioned member.' },
 
-                { name: 'unmute', value: 'unmutes the mentioned member' }
+                { name: 'unmute', value: 'unmutes the mentioned member' },
+
+                { name: 'warn', value: 'warns the mentioned member' },
+
+                { name: 'warns', value: 'displays the warns of the mentioned member' },
+
+                { name: 'list-warns-by', value: 'displays the list of warns made by the mentioned member(mod or admin)' }
 
             )
 
