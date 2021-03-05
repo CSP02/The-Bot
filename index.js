@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 require('dotenv').config();
 const keepAlive = require('./server.js');
 
-
+//this is the comment
 const client = new Discord.Client();
 client.command = new Discord.Collection();
 client.events = new Discord.Collection();
