@@ -20,8 +20,6 @@ module.exports = {
 
                 { name: 'serverinfo', value: 'Displays the brief info of the server' },
 
-
-
                 { name: 'Ping:', value: 'Shows the hearth beat of the bot.' },
 
                 { name: 'kick:', value: 'kicks the mentioned member' },
