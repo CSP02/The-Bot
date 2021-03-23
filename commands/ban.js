@@ -2,28 +2,27 @@ module.exports = {
     name: 'ban',
     description: "ban command",
     execute(client, message, args, Discord) {
-        //check the logs channel in a server so th at we can logs the message right when the member was banned
+        //Check the logs channel of the server so that we can logs the message right when the member was banned
         const sLogsChannel = client.channels.cache.get('811997907473268788')
 
-        //check if the messaged member that means one who uses the command 
-        //has BAN_MEMBERS permission to make sure he / she is not a mod or an admin
+        //check if the person who uses the command has BAN_MEMBERS permission to make sure that S/he is a mod or an admin
         if (message.member.hasPermission('BAN_MEMBERS')) {
-            //after confirmation we are assigning the mentioned user to the target
+            //If the person has the ban members perms, then the bot will assign the mentioned user as the target
             const target = message.mentions.users.first();
-            //check the member was mentioned if not mentioned the bot will ask to mention someone
+            //Check if the member was mentioned. If no member has been mentioned, the bot will ask to mention someone
             if (target) {
-                //memberTarget was the actual member we have to ban
+                //memberTarget is the actual member we have to ban
                 const memberTarget = message.guild.members.cache.get(target.id);
-                //check if the mentioned user has the BAN_MEMBERS permission to make sure he is not a mod or admin
+                //If the mentioned user also has the ban memmbers perms, then
                 if (memberTarget.hasPermission("BAN_MEMBERS")) {
-                    //sends the message to be a good mod
+                    //The bot will send this message
                     message.channel.send("Be a good mod");
-                } else { //executes if the mentioned member has no BAN_MEMBERS permission
+                } else { //If the mentioned user does not have the perms, then excute.
                     if (!args[1]) {
-                        //if there is no reason provided the bot will ask for the reason
+                        //If no reason has been provided, the bot will ask for a reason
                         message.channel.send("Provide a good reason to ban a member.")
                     } else {
-                        memberTarget.ban(); //bans the men=mber after confirming all the requirements
+                        memberTarget.ban(); //If all the requirments match, then the bot will ban the mentioned user.
 
                         //embed constructor to send an embed message in DM and in channel
                         const embedMsg = new Discord.MessageEmbed()
@@ -35,19 +34,20 @@ module.exports = {
 
                             )
                         message.channel.send(embedMsg); //send the embed message in the channel
-                        memberTarget.send(`You were banned from the server:\n**${message.guild.name}**.\n Because:\n **${args.slice(2).join(" ")}**. Take care.`) //send the DM message about the banning
+                        //Send this message in the dms of the banned user
+                        memberTarget.send(`You were banned from the server:\n**${message.guild.name}**.\n Because:\n **${args.slice(2).join(" ")}**. Take care.`) //send thi message about the banning
 
-                        sLogsChannel.send(`${memberTarget} was banned from this server.`) // send a message in the logs channel after the member was banned
+                        sLogsChannel.send(`${memberTarget} was banned from this server.`) // Send this message in the server logs after the user has been banned
                     }
                 }
             }
             else {
-                //if the mentioned memeber was not found or not there in the server bot will reply with this message
+                //If the mentioned user could not be found, the bot will reply with this message
                 message.channel.send('cant find that member');
             }
         }
         else {
-            // if the one who is using the command has no BAN_MEMBERS permission then the bot will reply this message.
+            //If the person who uses this command, does not have BAN_MEMBERS permission, then the bot will reply this message
             message.reply('you have no permission');
         }
     }
