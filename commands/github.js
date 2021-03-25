@@ -6,6 +6,6 @@ module.exports = {
     aliases: ['gh', 'source'],
     execute(client, message, args, Discord) {
 
-        message.send.channel('https://github.com/Chandra-sekhar-pilla/The-Bot');
+        message.channel.send('https://github.com/Chandra-sekhar-pilla/The-Bot');
     }
 }
