@@ -6,6 +6,8 @@ module.exports = {
 
     execute(client, message, args, Discord) {
 
+        message.react('✅');
+
         const embedMsg = new Discord.MessageEmbed()
 
             .setColor('#00ff00')
