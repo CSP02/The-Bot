@@ -6,7 +6,7 @@ module.exports = (Discord, client, message) => {
 
     ]
 
-    if (!message.content.startsWith(prefix) || message.author.bot) {
+    if (!message.content.startsWith(prefix) || message.author.bot || message.channel.type === 'dm') {
         for (const curseWords of words) {
             if (message.content.toLowerCase().includes(curseWords)) {
                 curseMsg = message.fetch(message.id)
