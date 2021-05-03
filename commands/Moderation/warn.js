@@ -1,15 +1,27 @@
-const mongo = require('../mongo')
-const warnShema = require('../schema')
+const mongo = require('../../mongo')
+const warnShema = require('../../schema')
 
 module.exports = {
     name: 'warn',
-    description: "warns the mentioned member",
+    description: "ban command",
     async execute(client, message, args, Discord) {
-        const target = message.mentions.users.first();
-        if (!target) return message.reply("please specfy the member to warn. and provide a good reason")
-        else if (!message.member.hasPermission('MUTE_MEMBERS')) return message.reply('You have no permission.')
-        else {
-            if (!message.member.hasPermission('ADMINISTRATOR')) return message.reply('You have no permission.')
+        let target = message.mentions.users.first()
+        let mentioned = message.mentions.members.first();
+        if (!target && !args[0]) return message.reply("please specfy the member to warn. and provide a good reason")
+        if (target) {
+            Warn(target)
+        } else if (args[0] && !isNaN(args[0])) {
+            client.users.fetch(args[0]).then(ment => {
+                Warn(ment)
+            })
+        } else {
+            message.reply('cant find member')
+        }
+
+
+        async function Warn(target) {
+            if (!message.member.hasPermission('MANAGE_MESSAGES')) message.reply('You have no permission.')
+            else if (mentioned.hasPermission('ADMINISTRATOR') && !message.member.hasPermission('ADMINISTRATOR')) return message.reply('You cannot, be a good mod.')
             else {
                 memberTarget = message.guild.members.cache.get(target.id) || message.guild.members.cache.get(args[0]);
                 args.shift();
@@ -19,6 +31,7 @@ module.exports = {
 
                 const warning = {
                     author: message.member.user.tag,
+                    user: target.tag,
                     timestamp: new Date().getTime(),
                     reason
                 }
@@ -31,19 +44,13 @@ module.exports = {
                     .addFields({ name: 'Reason:', value: `${reason}` });
 
                 message.channel.send(embedMsg);
-                const embedDmMsg = new Discord.MessageEmbed()
-                    .setColor('#ff0000')
-                    .setTitle('warned user:')
-                    .setThumbnail(`${target.displayAvatarURL()}`)
-                    .setDescription(`<@${target.id}> has been warned`)
-                    .addFields({ name: 'Reason:', value: `${reason}` });
-                memberTarget.send(embedDmMsg)
+                memberTarget.send(embedMsg)
 
                 await mongo().then(async mongoose => {
                     try {
                         await warnShema.findOneAndUpdate({
                             guildId,
-                            userId
+                            userId,
                         }, {
                             guildId,
                             userId,
