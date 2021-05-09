@@ -2,19 +2,23 @@ const fs = require('fs');
 
 module.exports = (client, Discord) => {
     const command_files = fs
-        .readdirSync('./commands/')
-        .filter(file => file.endsWith('.js'));
+        .readdirSync('./commands/').filter(file => file.endsWith(''))
 
-    for (const file of command_files) {
-        const command = require(`../commands/${file}`);
-        if (command) {
-            if (command.name) {
-                client.command.set(command.name, command);
+    for (const folder of command_files) {
+        const files = fs
+            .readdirSync(`./commands/${folder}/`)
+            .filter(file => file.endsWith('.js'))
+        for (const file of files) {
+            const command = require(`../../${folder}/${file}`);
+            if (command) {
+                if (command.name) {
+                    client.command.set(command.name, command);
+                } else {
+                    continue;
+                }
             } else {
-                continue;
+                message.channel.send('No such command exist so far.');
             }
-        } else {
-            message.channel.send('No such command exist so far.');
         }
     }
 }
