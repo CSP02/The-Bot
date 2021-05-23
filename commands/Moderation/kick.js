@@ -3,7 +3,8 @@ module.exports = {
     description: "kick command",
     execute(client, message, args, Discord) {
 
-        const sLogsChannel = client.channels.cache.get('811997907473268788')
+        const sLogsChannel = client.channels.cache.find(chn => chn.name === 'server-logs')
+        const server = message.guild
 
         if (message.member.hasPermission('KICK_MEMBERS')) {
             const target = message.mentions.users.first();
@@ -23,9 +24,7 @@ module.exports = {
                             )
                         message.channel.send(embedMsg);
                         memberTarget.send(`You were kicked from the server:\n**${message.guild.name}** Because:\n**${args.slice(2).join(" ")}**. Take care.`)
-
-                        sLogsChannel.send(`${memberTarget} was kicked from the server.`)
-
+                        sLogsChannel.send(embedMsg)
                     }
                 } else {
                     message.channel.send('Provide a good reason.')

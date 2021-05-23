@@ -5,33 +5,40 @@ module.exports = {
     name: 'points',
     description: "gives points for the jam participants",
     async execute(client, message, args, Discord) {
-        const target = message.mentions.users.first();
-        if (!target) return message.reply("please specfy the member to to give points. and say how many points to give")
-        else if (!message.member.hasPermission('KICK_MEMBERS')) return message.reply('You have no permission.')
+        const target = message.mentions.users.first() || message.guild.members.cache.get(args[0]).user || message.member.user
+        if (!args[0]) return message.channel.send("Specify user.")
+        else if (!target) return message.reply("User not found")
         else if (!args[1]) {
             const guildId = message.guild.id
             const userId = target.id
 
+            console.log(message.member.user)
+            console.log(message.mentions.users.first())
             await mongo().then(async mongoose => {
                 try {
                     const results = await pointsSchema.findOne({
                         guildId,
                         userId,
                     })
-
-                    let reply = `Recently added points of ${args[0]}:\n`
-
-                    for (const point of results.points) {
-                        const { author, points } = point
-                        if (point.points === null) {
-                            reply += '**Seems like you have no points participate a jam to get some points'
-                        }
-                        else {
-                            reply += `**${points} points.**`
-                        }
-
-                        message.channel.send(reply).catch(error)
+                    if (results == null) return message.channel.send(`**0 points.** Seems like not participated in jams.`)
+                    let reply = `Total points of ${args[0]}:\n`
+                    var totalPoints = parseInt('0', 10);
+                    var author = ''
+                    var i;
+                    for (i = 0; i < results.points.length; i++) {
+                        totalPoints += parseInt(results.points[i].points, 10);
                     }
+                    const embdMsg = new Discord.MessageEmbed()
+                        .setColor('#00ff00')
+                        .setTitle('Total points:')
+                        .setThumbnail(`${target.displayAvatarURL()}`)
+                        .setFooter('keep participating for more points and a special role.')
+                        .addFields(
+                            { name: 'User', value: `${target}` },
+                            { name: 'Total Points:', value: `${totalPoints} points` },
+
+                        );
+                    message.channel.send(embdMsg)
                     reply = null
                 } finally {
                     mongoose.connection.close()
@@ -40,6 +47,7 @@ module.exports = {
         }
         else if (target.bot) return message.channel.send("Bruh what...")
         else if (isNaN(args[1])) return message.reply('please enter a real number');
+        else if (!message.member.hasPermission('KICK_MEMBERS')) return message.reply('You have no permission.')
         else {
             memberTarget = message.guild.members.cache.get(target.id);
             args.shift();
@@ -59,7 +67,7 @@ module.exports = {
                 try {
                     await pointsSchema.findOneAndUpdate({
                         guildId,
-                        userId,
+                        userId
                     }, {
                         guildId,
                         userId,
@@ -75,9 +83,9 @@ module.exports = {
             })
             const embedMsg = new Discord.MessageEmbed()
                 .setColor('#00ff00')
-                .setTitle('User won:')
+                .setTitle('Points:')
                 .setThumbnail(`${target.displayAvatarURL()}`)
-                .setDescription('**keep participating for more points and a special role.**')
+                .setFooter('keep participating for more points and a special role.')
                 .addFields({ name: 'points:', value: `${target} has got ${points} points.` });
             message.channel.send(embedMsg)
         }

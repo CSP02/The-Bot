@@ -5,7 +5,7 @@ module.exports = {
 	execute(client, message, args, Discord) {
 		serverRoles = ""
 		message.guild.roles.cache.forEach(roles => {
-			if (roles.name === '@everyone' || roles.name === 'admin' || roles.name === 'Muted' || roles.name.includes('Bot') || roles.name === 'mod' || roles.name === 'Staff' || roles.name === 'ModMail' || roles.name.includes('Server Booster') || roles.name === 'event manager' || roles.name.includes('voted') || roles.name.includes('Dyno') || roles.name === 'Groovy' || roles.name.includes('manager') || roles.name.includes('bot') || roles.name.includes('Admin') || roles.name.includes('Denz')) {
+			if (roles.name === 'member' || roles.name === '@everyone' || roles.name === 'admin' || roles.name === 'Muted' || roles.name.includes('Bot') || roles.name === 'mod' || roles.name === 'Staff' || roles.name === 'ModMail' || roles.name.includes('Booster') || roles.name === 'event manager' || roles.name.includes('voted') || roles.name.includes('Dyno') || roles.name === 'Groovy' || roles.name.includes('manager') || roles.name.includes('bot') || roles.name.includes('Admin') || roles.name.includes('Denz') || roles.name.includes('shrimp') || roles.name.includes('first member')) {
 				return
 			}
 			else if (roles.name.includes("Team")) {
@@ -19,24 +19,38 @@ module.exports = {
 			serverRoles += "Server has no Roles."
 		}
 
+		mess = args.slice(0).join(' ')
+		if (mess) {
+			if (mess.includes('Bot') || mess.includes('Dyno') || mess.includes('Muted') || mess.includes('manager') || mess.includes('Groovy') || mess.includes('Server Booster')) return message.reply("These Roles are prohibited.")
+			else if (mess.includes("Team")) return message.channel.send("Those are teams. Use team command.")
+			else {
+				let myRole = message.guild.roles.cache.find(role => role.name === args.slice(0).join(' ').toLowerCase());
+				if (!myRole) return message.channel.send("role not found")
+				else if (myRole) {
 
-		if (args[0]) {
-			if ((args[0] === 'mod' || args[0] === 'admin' || args[0] === 'Staff') && message.member.roles.cache.some(r => r.name === 'admin')) {
-				let myRole = message.guild.roles.cache.find(role => role.name === args[0]);
+					let permissions = message.guild.roles.cache.find(role => role.name === `${args.slice(0).join(" ").toLowerCase()}`).permissions.serialize();
+					console.log(permissions)
+					if (permissions.VIEW_AUDIT_LOG && message.member.hasPermission("VIEW_AUDIT_LOG")) {
 
-				message.member.roles.add(myRole).catch(console.error);
-				message.channel.send('Role added');
-			} else if (args[0] != 'mod' && args[0] != 'admin' && args[0] != 'event-manager' && args[0] != 'Muted') {
-				let myRole = message.guild.roles.cache.find(role => role.name === args.slice(0).join(' '));
-				if (myRole) {
-					message.member.roles.add(myRole).catch(console.error);
-					message.channel.send('Role added');
+						console.log("Working!")
+						message.member.roles.add(myRole).catch(console.error);
+						const embmsg = new Discord.MessageEmbed()
+							.setColor('#f0fc03')
+							.setDescription(`Role ${myRole} is added to.\n Also welcome, new staff.`)
+						message.channel.send(embmsg)
+					} else if (!permissions.VIEW_AUDIT_LOG) {
+						console.log("working")
+						message.member.roles.add(myRole).catch(console.error);
+						const embmsg = new Discord.MessageEmbed()
+							.setColor('#f0fc03')
+							.setDescription(`Role ${myRole} is added to you hope you like it.`)
+						message.channel.send(embmsg)
+
+					} else {
+						message.reply("These Roles are prohibited.")
+					}
+
 				}
-				else {
-					message.channel.send('No such role is found. Check the spelling and roles are also case sensitive.');
-				}
-			} else {
-				message.reply(`You have no permission to add the ${args[0]} role\nAsk any of the admin to assign you the role.`);
 			}
 		} else {
 			const embdMsg = new Discord.MessageEmbed()

@@ -19,17 +19,18 @@ module.exports = {
                     let athr = ' '
                     let target = ' '
                     let infrId = 'Infraction ID: '
+                    let mem = message.guild.members.cache
 
                     for (const warning of results.warnings) {
-                        const { author, user, timestamp, reason, infrID } = warning
+                        const { author, userID, timestamp, reason, infrID } = warning
                         if (infrID == args[0]) {
-                            athr += `${author}`
+                            athr += `${mem.get(author)}`
                             resn += `${reason}`
-                            target += `${user}`
+                            target += `${mem.get(userID)}`
                             infrId += infrID
                         }
                     }
-                    if (athr === ' ' || resn === ' ' || target === ' ') {
+                    if (athr == ' ' || resn == ' ' || target == ' ') {
                         message.channel.send(`There is no warning with infraction id ${args[0]}`)
                     } else {
                         const embdmsg = new Discord.MessageEmbed()

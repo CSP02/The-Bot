@@ -1,5 +1,7 @@
 module.exports = (Discord, client, guildMember) => {
-
-    const sLogsChannel = client.channels.cache.get('your log channel id goes here')
-    sLogsChannel.send(`${guildMember} has left the server.`);
+    const serverLogsChn = guildMember.guild.channels.cache.find(chn => chn.name === 'server-logs')
+    const embedMsg = new Discord.MessageEmbed()
+        .setColor('#ff0000')
+        .setDescription(`${guildMember} left the server.`)
+    serverLogsChn.send(embedMsg)
 }

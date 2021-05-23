@@ -37,8 +37,8 @@ module.exports = {
         })
 
         for (const warning of results.warnings) {
-          const { author, user, timestamp, reason, infrID } = warning
-          if (user == target.user.tag) {
+          const { author, userID, timestamp, reason, infrID } = warning
+          if (userID == target.user.id) {
             infrCount++;
           }
         }

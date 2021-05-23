@@ -3,21 +3,22 @@ module.exports = {
   name: 'mute',
   description: 'This is ping command',
   execute(client, message, args, Discord) {
-    const modOrAdmin = message.member.hasPermission('MUTE_MEMBERS');
-    const sLogsChannel = client.channels.cache.get('811997907473268788')
+    const modOrAdmin = message.member.hasPermission('KICK_MEMBERS');
+    const sLogsChannel = message.guild.channels.cache.find(chn => chn.name === 'server-logs')
+    const server = message.guild
 
     if (modOrAdmin) {
-      const target = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-
-
+      const target = message.mentions.users.first()
       if (target) {
-        let mainRole = message.guild.roles.cache.find(role => role.name === 'shrimp') || message.guild.roles.cache.find(role => role.name === 'member');
+        let mainRole = message.guild.roles.cache.find(role => role.name === 'member') || message.guild.roles.cache.find(role => role.name === 'shrimp');
         let mutedRole = message.guild.roles.cache.find(role => role.name === 'Muted');
 
-        memberTarget = message.guild.members.cache.get(target.id) || message.guild.members.cache.get(args[0]);
-        if (memberTarget.hasPermission('MUTE_MEMBERS') && !message.member.hasPermission('ADMINISTRATOR')) { message.channel.send('Be a good mod.'); }
+        memberTarget = message.guild.members.cache.get(target.id)
+        if (memberTarget.hasPermission('MUTE_MEMBERS') && !message.member.hasPermission('ADMINISTRATOR')) {
+          message.channel.send('Be a good mod.');
+        }
         else {
-          if (!args[1]) {
+          if (!args[1] || !isNaN(args[1])) {
             message.reply('Specify the time')
           } else if (!args[2]) {
             message.reply('specify the reason to mute')
@@ -30,7 +31,10 @@ module.exports = {
             setTimeout(function () {
               memberTarget.roles.remove(mutedRole.id);
               memberTarget.roles.add(mainRole.id);
-              sLogsChannel.send(`Time to unmute ${memberTarget}. And unmuted.`)
+              const embdMsg = new Discord.MessageEmbed()
+                .setDescription(`Time to unmute ${memberTarget}. And unmuted.`)
+                .setColor('#00ff00')
+              sLogsChannel.send(embdMsg)
             }, ms(args[1]));
 
             const embedMsg = new Discord.MessageEmbed()
@@ -41,12 +45,7 @@ module.exports = {
               .addFields({ name: 'Reason:', value: `${args.slice(2).join(" ")}` }, { name: 'Muted period:', value: `${args[1]}` });
 
             message.channel.send(embedMsg);
-            if (server.id === '801451603860258861') {
-
-              sLogsChannel.send(`${memberTarget} has been muted.`)
-            } else if (server.id === '795133444610457640') {
-              taLogsChannel.send(`${memberTarget} has been  muted.`)
-            }
+            sLogsChannel.send(embedMsg)
             memberTarget.send(`You were muted in the server:\n**${message.guild.name}** Because:\n**${args.slice(2).join(" ")}**. Take care.`)
           }
         }
