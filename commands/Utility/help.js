@@ -149,6 +149,8 @@ module.exports = {
               { name: '!points <@user>', value: 'View how much points has a user earn.'},
               
               { name: '!ask', value: 'Try asking random question to bot it will answer you.'},
+
+              { name: '!javascript', value: 'Display links to learn JavaScript.'},
             
               )
               .setFooter('-Atelier bot');
