@@ -1,3 +1,5 @@
+//INFRACTIONS COMMAND
+
 const mongo = require('../../mongo')
 const schema = require('../../schema')
 
@@ -19,15 +21,17 @@ module.exports = {
                     let athr = ' '
                     let target = ' '
                     let infrId = 'Infraction ID: '
+                    let infrTp = ' '
                     let mem = message.guild.members.cache
 
                     for (const warning of results.warnings) {
-                        const { author, userID, timestamp, reason, infrID } = warning
+                        const { author, userID, timestamp, reason, infrType, infrID } = warning
                         if (infrID == args[0]) {
                             athr += `${mem.get(author)}`
                             resn += `${reason}`
                             target += `${mem.get(userID)}`
                             infrId += infrID
+                            infrTp += `${infrType}`
                         }
                     }
                     if (athr == ' ' || resn == ' ' || target == ' ') {
@@ -40,7 +44,8 @@ module.exports = {
                             .addFields(
                                 { name: "Author", value: `${athr}` },
                                 { name: 'User', value: `${target}` },
-                                { name: 'Warning', value: `${resn}` },
+                                { name: 'Infraction Type:', value: `${infrTp}` },
+                                { name: 'Reason', value: `${resn}` },
                             )
 
                         message.channel.send(embdmsg)
