@@ -2,6 +2,8 @@
 
 > The default prefix is "!".
 
+(same for every Guild/ server will release an update to make it able to change)
+
 * It is a discord bot for moderation.
 
 * The default role "member" will be added when someone joins the server. So make sure your server has member role. Most probably its a welcome role.
@@ -50,3 +52,10 @@ Followed tutorial by [Worn off keys](https://youtu.be/mHKbU8nOW58) to implement 
 ### Join Us:
 You can also join my discord server. Its all about helping people in development. Like modelling using blender, unity game dev, programming, unreal, and also some pc stuff you can try. Here is the link for my server and if you like, join it and also share with your friends who are seeking help or learining something.
 [The Atelier discord server](https://discord.gg/6Mcy5NpSpH)
+
+### Contribute:
+You can contribute to The-Bot by opening an issue for bugs or by opening a pull request to add some features. 
+
+### Support me:
+you can support me on [The Atelier team](https://www.patreon.com/the_Atelier)
+Thanks for the support
