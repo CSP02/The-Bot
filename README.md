@@ -2,7 +2,7 @@
 
 > The default prefix is "!".
 
-(same for every Guild/ server will release an update to make it able to change)
+(Prefix is same for every Guild/ server will release an update to make it able to change)
 
 * It is a discord bot for moderation.
 
