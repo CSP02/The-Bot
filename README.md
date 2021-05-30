@@ -8,7 +8,7 @@
 
 * Use !help to get the commands you can use.
 
-### Present commands:
+### Basic commands(Not all):
 
 Command |  Alias   |    Task    | Permission
 ------- |  -----   |    ----    | ----------
