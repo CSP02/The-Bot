@@ -9,6 +9,7 @@ module.exports = {
     async execute(client, message, args, Discord) {
         const sLogsChannel = message.guild.channels.cache.find(chn => chn.name === 'server-logs')
         const server = message.guild;
+        const infrType = 'Ban'
 
         if (message.member.hasPermission('BAN_MEMBERS')) {
             const target = message.mentions.users.first();
@@ -21,7 +22,7 @@ module.exports = {
                     if (!args[1]) {
                         message.channel.send('Provide a good reason to ban a member.');
                     } else {
-                        memberTarget.ban();
+
 
 
 
@@ -78,6 +79,7 @@ module.exports = {
                         message.channel.send(embedMsg);
                         memberTarget.send(embedMsg);
                         sLogsChannel.send(embedMsg);
+                        memberTarget.ban();
                         await mongo().then(async mongoose => {
                             try {
                                 await warnShema.findOneAndUpdate({
