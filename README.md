@@ -38,6 +38,7 @@ infraction | infr, wi | replies with the warning of the given infraction ID | @m
 * Removed warns command(we will include the same functionality in infractions command).
 * Added syntaxs for every command. 
 
+### Command usage:
 ```
 Example:
 
