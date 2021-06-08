@@ -6,7 +6,9 @@
 
 * It is a discord bot for moderation.
 
-* The default role "member" will be added when someone joins the server. So make sure your server has member role. Most probably its a welcome role.
+* The default role "member" and the role "Muted" will be added to the guild when the bot is logged in. So don't delete that roles
+
+* The Bot will create two channels for muted people and for server logs(Don't remove those channels).
 
 * Use !help to get the commands you can use.
 
