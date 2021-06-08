@@ -5,7 +5,8 @@ const warnShema = require('../../schema')
 
 module.exports = {
     name: 'warn',
-    description: "ban command",
+    description: "warns the mentioned member in a guild with an infractionID",
+    syntax: '!warn <user>',
     async execute(client, message, args, Discord) {
         const infrType = 'warning'
         let mentioned = message.mentions.members.first();
@@ -26,7 +27,6 @@ module.exports = {
             if (!message.member.hasPermission('MANAGE_MESSAGES')) message.reply('You have no permission.')
             else if (target.hasPermission('ADMINISTRATOR') && !message.member.hasPermission('ADMINISTRATOR')) return message.reply('You cannot, be a good mod.')
             else {
-                console.log(target.id)
                 const guildId = message.guild.id;
                 const userId = target.id;
                 let reason = 'Undefined'

@@ -3,6 +3,7 @@ module.exports = {
     name: 'discordjs',
     description: "Displays the link for learning discord.js ",
     aliases: ['discordjs', 'learndjs', 'djs'],
+    syntax: '!learndjs',
     execute(client, message, args, Discord) {
 
         const embedMsg = new Discord.MessageEmbed()

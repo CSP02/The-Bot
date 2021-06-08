@@ -5,7 +5,8 @@ const warnShema = require('../../schema')
 
 module.exports = {
     name: 'kick',
-    description: "kick command",
+    description: "kicks a member from th guild",
+    syntax: '!kick <user>',
     async execute(client, message, args, Discord) {
 
         const sLogsChannel = client.channels.cache.find(chn => chn.name === 'server-logs')

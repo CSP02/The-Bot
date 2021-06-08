@@ -1,5 +1,7 @@
 module.exports = {
     name: 'clear',
+    description: 'Clears the number of messages mentioned or the messages of the mentinoed user in channel ',
+    syntax: '!clear <number of messages>|<user>',
     async execute(client, message, args, Discord) {
         if (message.member.hasPermission('MANAGE_MESSAGES')) {
             const target = message.mentions.users.first();

@@ -2,6 +2,7 @@ module.exports = {
     name: "pinnedmsg",
     description: "sends the pinned message of the channel.",
     aliases: ["pm", "pinned", "pinmsg"],
+    syntax: '!pinmsg || !pinmsg <number>',
     execute(client, message, args, Discord) {
         let reply = []
         let i = parseInt('0', 10)

@@ -2,7 +2,7 @@
 
 > The default prefix is "!".
 
-(Prefix is same for every Guild/ server will release an update to make it able to change)
+(Prefix is same for every Guild/ server will release an update to make it able to change for different guilds)
 
 * It is a discord bot for moderation.
 
@@ -31,6 +31,13 @@ warns | list-warns, lstwarns, lw | replies with the warns of the mentioned membe
 infraction | infr, wi | replies with the warning of the given infraction ID | @mods, @admins
 
 
+### Version Info:
+* Updated help command now it is dynamic.
+* Fixed a bug where bot is recognizing space and other symbols as commands.
+* Fixed a bug in unmute and unban command
+* Removed warns command(we will include the same functionality in infractions command).
+* Added syntaxs for every command. 
+
 ```
 Example:
 
@@ -57,5 +64,5 @@ You can also join my discord server. Its all about helping people in development
 You can contribute to The-Bot by opening an issue for bugs or by opening a pull request to add some features. 
 
 ### Support me:
-you can support me on [The Atelier team](https://www.patreon.com/the_Atelier)
+you can support me on [The Atelier team patreon](https://www.patreon.com/the_Atelier)
 Thanks for the support

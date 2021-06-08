@@ -1,175 +1,91 @@
+const fs = require('fs');
+
 module.exports = {
   name: 'help',
-  description: "Here is the list of help commands",
+  description: 'Lists the commands of the bot.',
+  syntax: '!help <module>',
   execute(client, message, args, Discord) {
+    if (!args[0]) {
+      const embedMsg = new Discord.MessageEmbed()
+        .setTitle('Help:')
+        .setColor('#00ff00')
 
-    let help_module = (args[0]);
-
-    if (!help_module) {
-
-      const embed = new Discord.MessageEmbed()
-
-        .setColor('#89f1f5')
-        .setTitle('**Command help ** ')
-        .setDescription("Here is the list of module that you access . Type !help `module name` to see all the commands of that module. ")
-
-
-        .addFields(
-
-          { name: '**Utility**', value: 'Show Utility commands that are available in bot.' },
-
-          { name: '**Soft-Moderation**', value: 'Provide Soft moderation command like rules.' },
-
-          { name: '**Moderation**', value: 'Provide information about Moderation commands for staffs.' },
-
-          { name: '**User**', value: 'Provide commands to customize user.' },
-
-          { name: '**Custom-command**', value: 'Provide the list of custom commands.' }
-
+      const command_files = fs
+        .readdirSync('./commands/')
+      for (const folder of command_files) {
+        const description = require(`../${folder}/description.js`)
+        desc = description.description
+        embedMsg.addFields(
+          { name: folder, value: `${desc}` }
         )
-        .setFooter('-Atelier Bot');
-      message.channel.send(embed);
-    } else
-      if (help_module) {
-
-        const module = help_module.toLowerCase();
-
-        if (module === "utility") {
-          const embed = new Discord.MessageEmbed()
-
-            .setColor('#89f1f5')
-            .setTitle('**Utility** ')
-            .setDescription("Here are some Utility commands that you can access. ")
-
-            .addFields(
-              { name: '!ping', value: 'Will show current latency of bot.' },
-
-              { name: '!role', value: 'Will give list of all the roles that member can get.' },
-
-              { name: '!serverinfo', value: 'It will give brief info about server. ' },
-
-              { name: '!userinfo', value: 'It provide userinfo.' },
-
-              { name: '!github', value: 'It will provide bot source code link from github.' },
-
-              { name: '!team', value: 'Let you join a team if the server had any.' },
-
-              { name: '!removerole', value: 'Removes the role mentioned.' },
-
-              { name: '!leaveteam', value: 'leaves the team mentioned.' },
-
-            )
-            .setFooter('-Atelier bot');
-          message.channel.send(embed);
-
-        } else
-
-          if (module === "soft-moderation") {
-            const embed = new Discord.MessageEmbed()
-
-              .setColor('#89f1f5')
-              .setTitle('**Soft Moderation** ')
-              .setDescription("Here are some Soft moderation commands that you can access to display rules. ")
-
-
-              .addFields(
-                { name: '!rule <number>', value: 'Display rules of server according to the number provided' }
-
-              )
-              .setFooter('-Atelier bot');
-            message.channel.send(embed);
-
-          } else
-
-
-            if (module === "moderation") {
-              const embed = new Discord.MessageEmbed()
-
-                .setColor('#89f1f5')
-                .setTitle('**Moderation** ')
-                .setDescription("Moderation commands that are accessible by Staffs only.  ")
-
-
-                .addFields(
-                  { name: '!ban', value: 'Will ban the provided user. ' },
-
-                  { name: '!kick', value: 'Will kick the provided user from server.  ' },
-
-                  { name: '!mute', value: 'Will mute the provided user. ' },
-
-                  { name: '!unmute', value: 'Will unmute the provided user. ' },
-
-                  { name: '!clear <number>', value: 'Clear the provided number of messages.' },
-
-                  { name: '!warn', value: 'Use this command to warn user.' }
-
-                )
-                .setFooter('-Atelier bot');
-              message.channel.send(embed);
-
-            } else
-
-              if (module === "user") {
-                const embed = new Discord.MessageEmbed()
-
-                  .setColor('#89f1f5')
-                  .setTitle('**User** ')
-                  .setDescription("Here is the list of commands that user can use to customize itself. ")
-
-
-                  .addFields(
-                    { name: '!team ', value: 'It will provide list of all the teams.' },
-
-                    { name: '!team <team>', value: 'Will let you to join team. ' },
-
-                    { name: '!leaveteam <team>', value: 'Will let you to leave team. ' },
-
-                    { name: '!role', value: 'It will provide list of roles that member can join.  ' },
-
-                    { name: '!role <role>', value: 'Will let you to get roles.  ' },
-
-                    { name: '!leave <role>', value: 'Will let you to remove roles from your profile. ' }
-
-                  )
-                  .setFooter('-Atelier bot');
-                message.channel.send(embed);
-
-              } else
-
-                if (module === "custom-command") {
-                  const embed = new Discord.MessageEmbed()
-
-                    .setColor('#D9EC15')
-                    .setTitle('**Custom commands** ')
-                    .setDescription("Here is the list of all the custom commands.  ")
-
-
-                    .addFields(
-                      { name: '!C#', value: 'Display links to learn C#.' },
-
-                      { name: '!djs', value: 'Display links to learn Discord.js.' },
-
-                      { name: '!bam', value: 'Bam any user lol.' },
-
-                      { name: '!points <@user>', value: 'View how much points has a user earn.' },
-
-                      { name: '!ask', value: 'Try asking random question to bot it will answer you.' },
-
-                    )
-                    .setFooter('-Atelier bot');
-                  message.channel.send(embed);
-
-                }
-
-
-                else {
-                  const embed = new Discord.MessageEmbed()
-                    .setColor('#de534b')
-                    .setTitle('**Error 🚫** ')
-                    .setDescription("Didn't find the module that you are trying to access !")
-                    .setFooter('-Atelier bot')
-                  message.channel.send(embed);
-                }
       }
+      message.channel.send(embedMsg)
+    } else if (args) {
+      var isMsgSent = false
+
+      if (!(fs.existsSync(`./commands/${args[0].toLowerCase()}/`))) {
+        const command_files = fs
+          .readdirSync('./commands/')
+
+        for (const folder of command_files) {
+          const files = fs
+            .readdirSync(`./commands/${folder}/`)
+            .filter(file => file.endsWith('.js'))
+          for (const file of files) {
+            if (file) {
+              const command = require(`../../commands/${folder}/${file}`);
+              if (command.name) {
+                if (command.name == `${args[0].toLowerCase()}`) {
+                  isMsgSent = true
+                  const embedMsg = new Discord.MessageEmbed()
+                    .setTitle(`${command.name}`)
+                    .setColor('#00ff00')
+                    .addFields(
+                      { name: `description`, value: `${command.description}` },
+                      { name: `syntax`, value: `${command.syntax}` },
+                      { name: `aliases`, value: `${command.aliases}` }
+                    )
+                  message.channel.send(embedMsg)
+                  break;
+                }
+              } else {
+                continue
+              }
+            }
+          }
+          if (isMsgSent) {
+            break
+          } else {
+            continue
+          }
+        }
+        if (!isMsgSent) {
+          message.channel.send('Command not found!')
+        }
+      } else {
+        const embedMsg = new Discord.MessageEmbed()
+          .setTitle('Help:')
+          .setColor('#00ff00')
+        const files = fs
+          .readdirSync(`./commands/${args[0].toLowerCase()}/`)
+          .filter(file => file.endsWith('.js'))
+        for (const file of files) {
+          if (file) {
+            const command = require(`../../commands/${args[0].toLowerCase()}/${file}`);
+            console.log(command.name)
+            if (command.name) {
+              embedMsg.addFields(
+                { name: `${command.name}\n`, value: `${command.description}` }
+              )
+            } else {
+              continue
+            }
+          } else {
+            message.channel.send('Module not found')
+          }
+        }
+        message.channel.send(embedMsg)
+      }
+    }
   }
 }

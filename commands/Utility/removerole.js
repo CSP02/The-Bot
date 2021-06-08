@@ -2,6 +2,7 @@ module.exports = {
     name: 'removerole',
     aliases: ['remove', 'rr', 'removerole'],
     description: 'removes a specified role',
+    syntax: '!removerole <role>',
     execute(client, message, args, Discord) {
         const cacheTeam = message.member.roles.cache
         if (args[0]) {

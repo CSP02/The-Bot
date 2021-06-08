@@ -5,56 +5,61 @@ const schema = require('../../schema')
 
 module.exports = {
     name: 'infraction',
-    description: 'sends warning details by infraction ids',
+    description: 'sends infraction details by infraction ids',
     aliases: ['infr', 'wi'],
+    syntax: '!infr <infraction ID>',
 
     async execute(client, message, args, Discord) {
-        await mongo().then(async mongoose => {
-            try {
-                const guildId = message.guild.id
-                const results = await schema.findOne({
-                    guildId
-                })
-                if (results === null) return message.channel.send("No warnings are found in this server.")
-                else {
-                    let resn = ' '
-                    let athr = ' '
-                    let target = ' '
-                    let infrId = 'Infraction ID: '
-                    let infrTp = ' '
-                    let mem = message.guild.members.cache
+        if (!message.member.hasPermission('MANAGE_MESSAGES')) {
+            message.channel.send(`Access denied`)
+        } else {
+            await mongo().then(async mongoose => {
+                try {
+                    const guildId = message.guild.id
+                    const results = await schema.findOne({
+                        guildId
+                    })
+                    if (results === null) return message.channel.send("No warnings are found in this server.")
+                    else {
+                        let resn = ' '
+                        let athr = ' '
+                        let target = ' '
+                        let infrId = 'Infraction ID: '
+                        let infrTp = ' '
+                        let mem = message.guild.members.cache
 
-                    for (const warning of results.warnings) {
-                        const { author, userID, timestamp, reason, infrType, infrID } = warning
-                        if (infrID == args[0]) {
-                            athr += `${mem.get(author)}`
-                            resn += `${reason}`
-                            target += `${mem.get(userID)}`
-                            infrId += infrID
-                            infrTp += `${infrType}`
+                        for (const warning of results.warnings) {
+                            const { author, userID, timestamp, reason, infrType, infrID } = warning
+                            if (infrID == args[0]) {
+                                athr += `${mem.get(author)}`
+                                resn += `${reason}`
+                                target += `${mem.get(userID)}`
+                                infrId += infrID
+                                infrTp += `${infrType}`
+                            }
+                        }
+                        if (athr == ' ' || resn == ' ' || target == ' ') {
+                            message.channel.send(`There is no warning with infraction id ${args[0]}`)
+                        } else {
+                            const embdmsg = new Discord.MessageEmbed()
+                                .setTitle('Warning')
+                                .setColor('#ff0000')
+                                .setFooter(`${infrId}`)
+                                .addFields(
+                                    { name: "Author", value: `${athr}` },
+                                    { name: 'User', value: `${target}` },
+                                    { name: 'Infraction Type:', value: `${infrTp}` },
+                                    { name: 'Reason', value: `${resn}` },
+                                )
+
+                            message.channel.send(embdmsg)
                         }
                     }
-                    if (athr == ' ' || resn == ' ' || target == ' ') {
-                        message.channel.send(`There is no warning with infraction id ${args[0]}`)
-                    } else {
-                        const embdmsg = new Discord.MessageEmbed()
-                            .setTitle('Warning')
-                            .setColor('#ff0000')
-                            .setFooter(`${infrId}`)
-                            .addFields(
-                                { name: "Author", value: `${athr}` },
-                                { name: 'User', value: `${target}` },
-                                { name: 'Infraction Type:', value: `${infrTp}` },
-                                { name: 'Reason', value: `${resn}` },
-                            )
 
-                        message.channel.send(embdmsg)
-                    }
+                } finally {
+                    mongoose.connection.close()
                 }
-
-            } finally {
-                mongoose.connection.close()
-            }
-        })
+            })
+        }
     }
 }

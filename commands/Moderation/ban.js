@@ -5,7 +5,8 @@ const warnShema = require('../../schema')
 
 module.exports = {
     name: 'ban',
-    description: 'ban command',
+    description: 'bans the mentioned user.',
+    syntax: '!ban <user>',
     async execute(client, message, args, Discord) {
         const sLogsChannel = message.guild.channels.cache.find(chn => chn.name === 'server-logs')
         const server = message.guild;

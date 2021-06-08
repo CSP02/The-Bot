@@ -1,6 +1,7 @@
 module.exports = {
     name: 'unban',
-    description: 'unban command',
+    description: 'unbans the mentioned member from a guild',
+    syntax: '!unban <user>',
     async execute(client, message, args, Discord) {
         const sLogsChannel = message.guild.channels.cache.find(chn => chn.name === 'server-logs')
         const server = message.guild;

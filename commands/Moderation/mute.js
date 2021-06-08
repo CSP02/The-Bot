@@ -5,7 +5,8 @@ const warnShema = require('../../schema')
 
 module.exports = {
   name: 'mute',
-  description: 'This is ping command',
+  description: 'mutes the mentioned user in a guild',
+  syntax: '!mute <user>',
   async execute(client, message, args, Discord) {
     const modOrAdmin = message.member.hasPermission('KICK_MEMBERS');
     const sLogsChannel = message.guild.channels.cache.find(chn => chn.name === 'server-logs')
