@@ -35,7 +35,7 @@ infraction | infr, wi | replies with the warning of the given infraction ID | @m
 * Updated help command now it is dynamic.
 * Fixed a bug where bot is recognizing space and other symbols as commands.
 * Fixed a bug in unmute and unban command
-* Removed warns command(we will include the same functionality in infractions command).
+* Merged warns and infractios command.
 * Added syntaxs for every command. 
 
 ### Command usage:
