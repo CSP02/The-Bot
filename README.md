@@ -38,6 +38,11 @@ infraction | infr, wi | replies with the warning of the given infraction ID | @m
 * Merged warns and infractios command.
 * Added syntaxs for every command. 
 
+### Features which may available for next version:
+* Will try to add delinfr command which will delete the specified infraction.
+* Will try to add createcustomcommand(ccc) command to create commands with the help of bot.
+* Will Fix the bugs i current version if it has any
+
 ### Command usage:
 ```
 Example:
