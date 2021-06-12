@@ -23,15 +23,17 @@ ping | - | Displays the current speed or latency of the bot | @everyone
 github | gh | Sends a link of this Bot's repository | @everyone
 removerole | remove, rr | removes a role from a user | @everyone
 role | - | assigns the given role | @everyone
-kick | - | Kicks the mentioned member | @mods, @admin
-ban | - | Banes the mentioned member | @mods, @admin
-mute | - | Mutes the mentioned member | @mod, @admin
-clear | - | Clears the given number of messages including the bot's message | @mods, @admins
-unmute | - | unmutes the mentioned member | @mods, @admins
-warn | - | warns the mentioned member | @mods, @admins
-warns | list-warns, lstwarns, lw | replies with the warns of the mentioned member | @mods, @admins
-infraction | infr, wi | replies with the warning of the given infraction ID | @mods, @admins
+kick | - | Kicks the mentioned member | @staff
+ban | - | Banes the mentioned member | @staff
+mute | - | Mutes the mentioned member | @staff
+deleteinfraction | - | di, delinfr | Deletes the infraction with infraction id specified | @staff
+clear | - | Clears the given number of messages including the bot's message | @staff
+unmute | - | unmutes the mentioned member | @staff
+warn | - | warns the mentioned member | @staff
+warns | list-warns, lstwarns, lw | replies with the warns of the mentioned member | @staff
+infraction | infr, wi | replies with the warning of the given infraction ID | @staff
 
+> Inorder to know more about the commands join my discord server.
 
 ### Version Info:
 * Updated help command now it is dynamic.
