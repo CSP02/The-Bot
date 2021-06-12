@@ -10,7 +10,9 @@ module.exports = {
   syntax: '!userinfo <user>',
   async execute(client, message, args, Discord) {
     let target = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
-
+    if(!target){
+      target = message.member
+    }
     memberRoles = target._roles
     mentionedRoles = ""
     const guildId = message.guild.id
