@@ -26,7 +26,7 @@ role | - | assigns the given role | @everyone
 kick | - | Kicks the mentioned member | @staff
 ban | - | Banes the mentioned member | @staff
 mute | - | Mutes the mentioned member | @staff
-deleteinfraction | - | di, delinfr | Deletes the infraction with infraction id specified | @staff
+deleteinfraction | di, delinfr | Deletes the infraction with infraction id specified |  @staff
 clear | - | Clears the given number of messages including the bot's message | @staff
 unmute | - | unmutes the mentioned member | @staff
 warn | - | warns the mentioned member | @staff
