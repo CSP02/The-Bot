@@ -39,7 +39,7 @@ infraction | infr, wi | replies with the warning of the given infraction ID | @s
 * Added a new command where it will sends an embed contains the rendered graph of the given equation.
 
 ### Reference for graph command
-* The API is developed by @denzven in python. For more information about examples visit [Pythonwhere](https://denzven.pythonanywhere.com/) 
+* The API is developed by @Denzven in python. For more information about examples visit [Pythonwhere](https://denzven.pythonanywhere.com/) 
 
 ### Features which may available for next version:
 * Will try to add createcustomcommand(ccc) command to create commands with the help of bot.
