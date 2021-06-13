@@ -36,14 +36,12 @@ infraction | infr, wi | replies with the warning of the given infraction ID | @s
 > Inorder to know more about the commands join my discord server.
 
 ### Version Info:
-* Updated help command now it is dynamic.
-* Fixed a bug where bot is recognizing space and other symbols as commands.
-* Fixed a bug in unmute and unban command
-* Merged warns and infractios command.
-* Added syntaxs for every command. 
+* Added a new command where it will sends an embed contains the rendered graph of the given equation.
+
+### Reference for graph command
+* The API is developed by @denzven in python. For more information about examples visit [Pythonwhere](https://denzven.pythonanywhere.com/) 
 
 ### Features which may available for next version:
-* Will try to add delinfr command which will delete the specified infraction.
 * Will try to add createcustomcommand(ccc) command to create commands with the help of bot.
 * Will Fix the bugs i current version if it has any
 
