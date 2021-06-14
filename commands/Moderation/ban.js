@@ -5,12 +5,12 @@ const warnShema = require('../../schema')
 
 module.exports = {
     name: 'ban',
-    description: 'bans the mentioned user.',
+    description: 'Ban the mentioned user.',
     syntax: '!ban <user>',
     async execute(client, message, args, Discord) {
-        const sLogsChannel = message.guild.channels.cache.find(chn => chn.name === 'server-logs')
+        const sLogsChannel = message.guild.channels.cache.find(chn => chn.name === 'server-logs');
         const server = message.guild;
-        const infrType = 'Ban'
+        const infrType = 'Ban';
 
         if (message.member.hasPermission('BAN_MEMBERS')) {
             const target = message.mentions.users.first();
@@ -23,41 +23,34 @@ module.exports = {
                     if (!args[1]) {
                         message.channel.send('Provide a good reason to ban a member.');
                     } else {
-
-
-
-
                         const guildId = message.guild.id;
                         const userId = target.id;
-                        let reason = 'Undefined'
+                        let reason = 'Undefined';
                         if (args[1]) {
-                            reason = args.slice(1).join(' ')
+                            reason = args.slice(1).join(' ');
                         }
                         var infrID = parseInt('1', 10);
-
 
                         await mongo().then(async mongoose => {
                             try {
                                 const results = await warnShema.findOne({
                                     guildId
-                                })
+                                });
                                 if (results == null) {
-                                    return
+                                    return;
                                 } else {
-                                    let reply = ' '
-                                    var infr
+                                    let reply = ' ';
+                                    var infr;
                                     for (const warning of results.warnings) {
-                                        const { author, userID, timestamp, reason, infrID } = warning
-                                        infr = parseInt(infrID, 10)
+                                        const { author, userID, timestamp, reason, infrID } = warning;
+                                        infr = parseInt(infrID, 10);
                                     }
-                                    infrID += parseInt(infr, 10)
+                                    infrID += parseInt(infr, 10);
                                 }
                             } finally {
-                                mongoose.connection.close()
+                                mongoose.connection.close();
                             }
                         })
-
-
 
                         const warning = {
                             author: message.member.user.id,
@@ -66,7 +59,7 @@ module.exports = {
                             reason,
                             infrType,
                             infrID
-                        }
+                        };
 
                         const embedMsg = new Discord.MessageEmbed()
                             .setColor('#ff0000')
@@ -94,17 +87,17 @@ module.exports = {
                                     upsert: true
                                 })
                             } finally {
-                                mongoose.connection.close()
+                                mongoose.connection.close();
                             }
                         })
                     }
                 }
             } else {
-                message.channel.send('cant find that member');
+                message.channel.send('Can\'t find that member.');
             }
         }
         else {
-            message.reply('you have no permission');
+            message.reply('You didn\'t have the Permission.');
         }
     }
 }

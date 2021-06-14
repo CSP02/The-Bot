@@ -2,36 +2,36 @@
 
 > The default prefix is "!".
 
-(Prefix is same for every Guild/ server will release an update to make it able to change for different guilds)
+(Prefix is same for every Guild/Server will release an update to make it able to change for different guilds.)
 
 * It is a discord bot for moderation.
 
 * The default role "member" and the role "Muted" will be added to the guild when the bot is logged in. So don't delete that roles
 
-* The Bot will create two channels for muted people and for server logs(Don't remove those channels).
+* The Bot will create two channels for muted people and for server logs (Don't remove those channels).
 
 * Use !help to get the commands you can use.
 
-### Basic commands(Not all):
+### Basic commands (Not all):
 
-Command |  Alias   |    Task    | Permission
-------- |  -----   |    ----    | ----------
-help | - | Displays the commands you can use | @everyone
-serverinfo | si | Displays the information about the server | @everyone
-userinfo | ui | Displays the information of mentioned user if not mentioned Displays the info about you | @everyone
-ping | - | Displays the current speed or latency of the bot | @everyone
-github | gh | Sends a link of this Bot's repository | @everyone
-removerole | remove, rr | removes a role from a user | @everyone
-role | - | assigns the given role | @everyone
-kick | - | Kicks the mentioned member | @staff
-ban | - | Banes the mentioned member | @staff
-mute | - | Mutes the mentioned member | @staff
+Command 	|  	Alias	|    Task    | Permission
+---------- 	|  	-----	|    ----    | ----------
+help		| -	| Displays the commands you can use | @everyone
+serverinfo	| si | Displays the information about the server | @everyone
+userinfo	| ui | Displays the information of mentioned user if not mentioned Displays the info about you | @everyone
+ping 		| - | Displays the current speed or latency of the bot | @everyone
+github 		| gh | Sends a link of this Bot's repository | @everyone
+removerole 	| remove, rr | removes a role from a user | @everyone
+role 		| - | assigns the given role 		| @everyone
+kick 		| - | Kicks the mentioned member 	| @staff
+ban 		| - | Banes the mentioned member 	| @staff
+mute 		| - | Mutes the mentioned member 	| @staff
 deleteinfraction | di, delinfr | Deletes the infraction with infraction id specified |  @staff
-clear | - | Clears the given number of messages including the bot's message | @staff
-unmute | - | unmutes the mentioned member | @staff
-warn | - | warns the mentioned member | @staff
-warns | list-warns, lstwarns, lw | replies with the warns of the mentioned member | @staff
-infraction | infr, wi | replies with the warning of the given infraction ID | @staff
+clear 		| - | Clears the given number of messages including the bot's message | @staff
+unmute 		| - | unmutes the mentioned member 	| @staff
+warn 		| - | warns the mentioned member 	| @staff
+warns 		| list-warns, lstwarns, lw | replies with the warns of the mentioned member | @staff
+infraction 	| infr, wi | replies with the warning of the given infraction ID | @staff
 
 > Inorder to know more about the commands join my discord server.
 
@@ -43,7 +43,7 @@ infraction | infr, wi | replies with the warning of the given infraction ID | @s
 
 ### Features which may available for next version:
 * Will try to add createcustomcommand(ccc) command to create commands with the help of bot.
-* Will Fix the bugs i current version if it has any
+* Will Fix the bugs i current version if it has any.
 
 ### Command usage:
 ```
@@ -73,4 +73,4 @@ You can contribute to The-Bot by opening an issue for bugs or by opening a pull 
 
 ### Support me:
 you can support me on [The Atelier team patreon](https://www.patreon.com/the_Atelier)
-Thanks for the support
+Thanks for the support.

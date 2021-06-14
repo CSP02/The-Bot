@@ -1,6 +1,6 @@
 module.exports = {
     name: 'ask',
-    description: "Ask a random question and bot will answer it. ",
+    description: "Ask a random question and bot will answer it.",
     aliases: ['asks', 'question'],
     syntax:'!ask <question>',
     execute(client, message, args, Discord) {
@@ -8,7 +8,7 @@ module.exports = {
         let question = args[0];
         if (!question) return message.channel.send("Please enter the question ! ");
 
-        const replies = ["Yes", "No", "Maybe", "Never", "Definitely !", "Ask again later", "Most likely", "Cannot predict now.", "indeed", "perhaps"];
+        const replies = ["Yes", "No", "Maybe", "Never", "Definitely!", "Ask again later", "Most likely", "Cannot predict now.", "indeed", "perhaps"];
         const answer = Math.floor(Math.random() * replies.length);
         const questions = args.join(" ");
 

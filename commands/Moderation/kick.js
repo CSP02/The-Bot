@@ -5,13 +5,13 @@ const warnShema = require('../../schema')
 
 module.exports = {
     name: 'kick',
-    description: "kicks a member from th guild",
+    description: "Kick a Member from a Guild.",
     syntax: '!kick <user>',
     async execute(client, message, args, Discord) {
 
-        const sLogsChannel = client.channels.cache.find(chn => chn.name === 'server-logs')
-        const server = message.guild
-        const infrType = 'Kick'
+        const sLogsChannel = client.channels.cache.find(chn => chn.name === 'server-logs');
+        const server = message.guild;
+        const infrType = 'Kick';
         if (message.member.hasPermission('KICK_MEMBERS')) {
             const target = message.mentions.users.first();
             if (target) {
@@ -21,13 +21,11 @@ module.exports = {
                     else {
                         memberTarget.kick();
 
-
-
                         const guildId = message.guild.id;
                         const userId = target.id;
-                        let reason = 'Undefined'
+                        let reason = 'Undefined';
                         if (args[1]) {
-                            reason = args.slice(1).join(' ')
+                            reason = args.slice(1).join(' ');
                         }
                         var infrID = parseInt('1', 10);
 
@@ -36,20 +34,20 @@ module.exports = {
                             try {
                                 const results = await warnShema.findOne({
                                     guildId
-                                })
+                                });
                                 if (results == null) {
-                                    return
+                                    return;
                                 } else {
-                                    let reply = ' '
-                                    var infr
+                                    let reply = ' ';
+                                    var infr;
                                     for (const warning of results.warnings) {
-                                        const { author, userID, timestamp, reason, infrType, infrID } = warning
-                                        infr = parseInt(infrID, 10)
+                                        const { author, userID, timestamp, reason, infrType, infrID } = warning;
+                                        infr = parseInt(infrID, 10);
                                     }
-                                    infrID += parseInt(infr, 10)
+                                    infrID += parseInt(infr, 10);
                                 }
                             } finally {
-                                mongoose.connection.close()
+                                mongoose.connection.close();
                             }
                         })
 
@@ -61,7 +59,7 @@ module.exports = {
                             reason,
                             infrType,
                             infrID
-                        }
+                        };
 
                         const embedMsg = new Discord.MessageEmbed()
                             .setColor('#ff0000')
@@ -70,10 +68,10 @@ module.exports = {
                             .setFooter(`Infraction ID: ${infrID}`)
                             .addFields(
                                 { name: 'Reason:', value: `${args.slice(1).join(" ")}` }
-                            )
+                            );
                         message.channel.send(embedMsg);
-                        memberTarget.send(`You were kicked from the server:\n**${message.guild.name}** Because:\n**${args.slice(2).join(" ")}**. Take care.`)
-                        sLogsChannel.send(embedMsg)
+                        memberTarget.send(`You were kicked from the server:\n**${message.guild.name}** Because:\n**${args.slice(2).join(" ")}**. Take care.`);
+                        sLogsChannel.send(embedMsg);
                         await mongo().then(async mongoose => {
                             try {
                                 await warnShema.findOneAndUpdate({
@@ -87,20 +85,20 @@ module.exports = {
                                     upsert: true
                                 })
                             } finally {
-                                mongoose.connection.close()
+                                mongoose.connection.close();
                             }
                         })
                     }
                 } else {
-                    message.channel.send('Provide a good reason.')
+                    message.channel.send('Provide a good reason.');
                 }
             }
             else {
-                message.channel.send('cant find that member');
+                message.channel.send("Can't find the Mentioned member.");
             }
         }
         else {
-            message.reply('you have no permission');
+            message.reply("You didn't have the permission.");
         }
     }
 }

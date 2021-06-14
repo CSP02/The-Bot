@@ -5,7 +5,7 @@ const warnShema = require('../../schema')
 
 module.exports = {
   name: 'mute',
-  description: 'mutes the mentioned user in a guild',
+  description: 'Mute the Mentioned user in a Guild.',
   syntax: '!mute <user>',
   async execute(client, message, args, Discord) {
     const modOrAdmin = message.member.hasPermission('KICK_MEMBERS');
@@ -29,7 +29,7 @@ module.exports = {
         }
         else {
           memberTarget.roles.remove(mainRole.id);
-          memberTarget.roles.add(mutedRole.id)
+          memberTarget.roles.add(mutedRole.id);
 
 
           const guildId = message.guild.id;
@@ -102,12 +102,12 @@ module.exports = {
           })
         }
       } else if (args[0]) {
-        message.channel.send('cant find that member');
+        message.channel.send('Can\'t find the Mentioned member.');
       } else {
-        message.channel.send('Mention the user you want to mute')
+        message.channel.send('Mention the user you want to mute.')
       }
     } else {
-      message.reply('you have no permission');
+      message.reply('You didn\'t have the permission to use this Command.');
     }
   }
 }

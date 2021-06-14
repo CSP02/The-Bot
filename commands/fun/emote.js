@@ -1,6 +1,6 @@
 module.exports = {
     name: 'react',
-    description: 'reacts to the message you tagged or it will react to your message(using this command.)',
+    description: 'Reacts to the message you tagged or it will react to your message. (Using this command.)',
     syntax: '!react',
     execute(client, message, args, Discord) {
         var i = parseInt('0', 10)

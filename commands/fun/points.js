@@ -3,7 +3,7 @@ const pointsSchema = require('../../pointsSchema')
 
 module.exports = {
     name: 'points',
-    description: "gives points for the jam participants",
+    description: "Gives points for the jam participants.",
     syntax: 'For users:\n !points <user>\nFor staff: !points <number of points>\n',
     async execute(client, message, args, Discord) {
         const target = message.mentions.users.first() || message.guild.members.cache.get(args[0]).user || message.member.user

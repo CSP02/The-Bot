@@ -1,11 +1,11 @@
 module.exports = {
     name: 'bam',
-    description: 'bam fun command',
+    description: 'bam fun command.',
     syntax: '!bam <user>',
     execute(client, message, args, Discord) {
         target = message.mentions.users.first();
         if (!target) {
-            message.reply("mention a user bish.")
+            message.reply("Mention a user bish")
         } else if (!args[1]) {
             message.reply("Provide a reason bish")
         } else {

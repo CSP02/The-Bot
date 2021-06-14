@@ -1,6 +1,6 @@
 module.exports = {
     name: 'graph',
-    description: 'sends the embed image containing the graph of given equation',
+    description: 'Sends the embed image containing the graph of given equation.',
     aliases: ['showgraphically', 'sg', 'graphical', 'gr'],
     syntax: '!sg <equation>',
     others: "**Representation**:\n\naddition/plus -> '+';\nsubtraction/minus -> '-';\nmultiplication/into -> '*';\ndivision -> '/';\npower(square,cube etc) -> '^'",
