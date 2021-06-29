@@ -30,7 +30,6 @@ deleteinfraction | di, delinfr | Deletes the infraction with infraction id speci
 clear 		| - | Clears the given number of messages including the bot's message | @staff
 unmute 		| - | unmutes the mentioned member 	| @staff
 warn 		| - | warns the mentioned member 	| @staff
-warns 		| list-warns, lstwarns, lw | replies with the warns of the mentioned member | @staff
 infraction 	| infr, wi | replies with the warning of the given infraction ID | @staff
 
 > Inorder to know more about the commands join my discord server.
