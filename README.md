@@ -40,6 +40,9 @@ infraction 	| infr, wi | replies with the warning of the given infraction ID | @
 
 ### Reference for graph API
 * The API is developed by [@Denzven](https://github.com/denzven) in python. For more information about examples visit [Pythonwhere](https://denzven.pythonanywhere.com/) 
+* [Docs for this API](https://denzven.github.io/Denzven-Graphing-Api/).
+* To use this API in your discord bot see the graph command or you can view code [here](https://denzven.github.io/Denzven-Graphing-Api-Bot
+)
 
 ### Features which may available for next version:
 * Will try to add createcustomcommand(ccc) command to create commands with the help of bot.
