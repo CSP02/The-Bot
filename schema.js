@@ -4,10 +4,6 @@ const warnSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    userId: {
-        type: String,
-        require: true
-    },
     warnings: {
         type: [Object],
         require: true
