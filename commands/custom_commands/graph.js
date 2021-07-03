@@ -7,10 +7,9 @@ module.exports = {
     footer: "\n\nNote:\n\nnote that spaces may crash the API so don't use spaces while providing the equation to this command\n\nTrigonimetric terms can be passed as usual like sin(x) and angle inside brackets\n\nNote that BODMAS applies. If you don't know what BODMAS is kindly google it.",
 
     async execute(client, message, args, Discord) {
-        var equation = `${args.slice(0).join('&')}`.replace(/\+/g, '%2B').replace(/\^/g, '**').replace(/√/g, '%E2%88%9A').replace(/π/g, '%CF%80')
-        var i = parseInt('1', 10)
+        var equation = encodeURIComponent(`${args.slice(0).join('&')}`)
         const embedMsg = new Discord.MessageEmbed()
-        const img1 = `http://denzven.pythonanywhere.com/DenzGraphingApi/v1/flat_graph/test/plot?formula=${equation}`
+        const img1 = `https://denzven.pythonanywhere.com/DenzGraphingApi/v1/flat_graph/test/plot?formula=${equation}`
         embedMsg
             .setURL(`${img1}`)
             .setColor("#00ff00")
