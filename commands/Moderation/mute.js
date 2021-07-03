@@ -5,7 +5,7 @@ const warnShema = require('../../schema')
 
 module.exports = {
   name: 'mute',
-  description: 'Mute the Mentioned user in a Guild.',
+  description: 'mutes the mentioned user in a guild',
   syntax: '!mute <user>',
   async execute(client, message, args, Discord) {
     const modOrAdmin = message.member.hasPermission('KICK_MEMBERS');
@@ -28,8 +28,7 @@ module.exports = {
 
         }
         else {
-          memberTarget.roles.remove(mainRole.id);
-          memberTarget.roles.add(mutedRole.id);
+          memberTarget.roles.add(mutedRole.id)
 
 
           const guildId = message.guild.id;
@@ -51,11 +50,13 @@ module.exports = {
               } else {
                 let reply = ' '
                 var infr
-                for (const warning of results.warnings) {
-                  const { author, userID, timestamp, reason, infrType, infrID } = warning
-                  infr = parseInt(infrID, 10)
+                if (results.warnings.length != 0) {
+                  for (const warning of results.warnings) {
+                    const { author, userID, timestamp, reason, infrType, infrID } = warning
+                    infr = parseInt(infrID, 10)
+                  }
+                  infrID += parseInt(infr, 10)
                 }
-                infrID += parseInt(infr, 10)
               }
             } finally {
               mongoose.connection.close()
@@ -102,12 +103,12 @@ module.exports = {
           })
         }
       } else if (args[0]) {
-        message.channel.send('Can\'t find the Mentioned member.');
+        message.channel.send('cant find that member');
       } else {
-        message.channel.send('Mention the user you want to mute.')
+        message.channel.send('Mention the user you want to mute')
       }
     } else {
-      message.reply('You didn\'t have the permission to use this Command.');
+      message.reply('you have no permission');
     }
   }
 }
