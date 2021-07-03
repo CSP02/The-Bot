@@ -1,7 +1,7 @@
 //WARN COMMAND
 
 const mongo = require('../../mongo');
-const warnShema = require('../../schema');
+const warnSchema = require('../../schema');
 
 module.exports = {
     name: 'warn',
@@ -38,7 +38,7 @@ module.exports = {
 
                 await mongo().then(async mongoose => {
                     try {
-                        const results = await warnShema.findOne({
+                        const results = await warnSchema.findOne({
                             guildId
                         });
                         if (results == null) {
@@ -80,7 +80,7 @@ module.exports = {
 
                 await mongo().then(async mongoose => {
                     try {
-                        await warnShema.findOneAndUpdate({
+                        await warnSchema.findOneAndUpdate({
                             guildId,
                         }, {
                             guildId,
