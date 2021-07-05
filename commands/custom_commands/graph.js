@@ -7,15 +7,18 @@ module.exports = {
     footer: "\n\nNote:\n\nnote that spaces may crash the API so don't use spaces while providing the equation to this command\n\nTrigonimetric terms can be passed as usual like sin(x) and angle inside brackets\n\nNote that BODMAS applies. If you don't know what BODMAS is kindly google it.",
 
     async execute(client, message, args, Discord) {
-        var equation = encodeURIComponent(`${args.slice(0).join('&')}`)
-        const embedMsg = new Discord.MessageEmbed()
-        const img1 = `https://denzven.pythonanywhere.com/DenzGraphingApi/v1/flat_graph/test/plot?formula=${equation}`
-        embedMsg
-            .setURL(`${img1}`)
-            .setColor("#00ff00")
-            .setTitle("The graphical representation of " + "``" + `${args}` + "``")
-            .setImage(img1)
-            .setAuthor(message.author.username, message.author.displayAvatarURL())
-        await message.channel.send(embedMsg).catch(console.error)
+        var i = 0
+        var python_anywhere_beta_BASEURL = "http://denzven.pythonanywhere.com/DenzGraphingApi/v1/flat_graph/test/plot"
+        for (e in args){
+            if (i == 0){
+                var equation = encodeURIComponent(`${args[e]}`)
+                python_anywhere_beta_BASEURL = python_anywhere_beta_BASEURL + `?formula=${equation}`
+                i += 1     
+            }
+            else{
+                python_anywhere_beta_BASEURL = python_anywhere_beta_BASEURL + `&${args[e]}`
+            }
+        
     }
+        message.channel.send(python_anywhere_beta_BASEURL);
 }
