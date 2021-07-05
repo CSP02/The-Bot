@@ -20,5 +20,5 @@ module.exports = {
             }
         
     }
-        message.channel.send(python_anywhere_beta_BASEURL);
+        await message.channel.send(python_anywhere_beta_BASEURL);
 }
