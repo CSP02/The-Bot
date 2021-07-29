@@ -2,8 +2,7 @@ module.exports = (Discord, client, message) => {
 	const prefix = '!';
 
 	const words = [
-		'nigg',
-		'retard',
+		//words you want to ban in your server nwords are default
 	];
 
 
@@ -32,14 +31,20 @@ module.exports = (Discord, client, message) => {
 		const tempCmd = cmd.split()
 		if (tempCmd[0] !== '' && tempCmd[0] !== '!') {
 			const command =
-
 				client.command.get(cmd) ||
-
 				client.command.find(a => a.aliases && a.aliases.includes(cmd));
-			if (command)
-				command.execute(client, message, args, Discord);
+			if (command) {
+				if (command.permissions) {
+					const authorPerms = message.channel.permissionsFor(message.author);
+					if (!authorPerms || !authorPerms.has(command.permissions)) {
+						return message.channel.send('Access Denied!')
+					} else {
+						command.execute(client, message, args, Discord);
+					}
+				}
+			}
 			else
-				message.channel.send('No such command exists so far.');
+				return message.channel.send('No such command exists so far.');
 		} else {
 			return
 		}

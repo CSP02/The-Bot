@@ -2,6 +2,7 @@ module.exports = {
     name: 'ask',
     description: "Ask a random question and bot will answer it.",
     aliases: ['asks', 'question'],
+    permissions:['VIEW_CHANNEL'],
     syntax:'!ask <question>',
     execute(client, message, args, Discord) {
 

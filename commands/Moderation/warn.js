@@ -1,59 +1,61 @@
 //WARN COMMAND
 
-const mongo = require('../../mongo');
-const warnSchema = require('../../schema');
+const mongo = require('../../mongo')
+const warnShema = require('../../schema')
 
 module.exports = {
     name: 'warn',
-    description: "Warns the Mentioned member in a Guild with an InfractionID.",
+    description: "warns the mentioned member in a guild with an infractionID",
     syntax: '!warn <user>',
+    permissions: ['VIEW_AUDIT_LOG'],
     async execute(client, message, args, Discord) {
-        const infrType = 'warning';
+        const infrType = 'warning'
         let mentioned = message.mentions.members.first();
         if (!mentioned && !args[0]) return message.reply("please specfy the member to warn. and provide a good reason")
         if (mentioned) {
-            Warn(mentioned);
+            Warn(mentioned)
         } else if (args[0] && !isNaN(args[0])) {
-            const ment = message.guild.members.cache.get(args[0]);
-            Warn(ment);
+            const ment = message.guild.members.cache.get(args[0])
+            Warn(ment)
         } else if (!args[0]) {
-            message.channel.send('Specify the user.');
+            message.channel.send('Specify the user.')
         } else {
-            message.reply('Can\'t find the User mentioned.');
+            message.reply('cant find member')
         }
 
 
         async function Warn(target) {
-            if (!message.member.hasPermission('MANAGE_MESSAGES')) message.reply('You have no permission.')
-            else if (target.hasPermission('ADMINISTRATOR') && !message.member.hasPermission('ADMINISTRATOR')) return message.reply('You cannot, be a good mod.')
+            if (target.hasPermission('ADMINISTRATOR') && !message.member.hasPermission('ADMINISTRATOR')) return message.reply('You cannot, be a good mod.')
             else {
                 const guildId = message.guild.id;
                 const userId = target.id;
-                let reason = 'Undefined';
+                let reason = 'Undefined'
                 if (args[1]) {
-                    reason = args.slice(1).join(' ');
+                    reason = args.slice(1).join(' ')
                 }
                 var infrID = parseInt('1', 10);
 
 
                 await mongo().then(async mongoose => {
                     try {
-                        const results = await warnSchema.findOne({
+                        const results = await warnShema.findOne({
                             guildId
-                        });
+                        })
                         if (results == null) {
-                            return;
+                            return
                         } else {
-                            let reply = ' ';
-                            var infr;
-                            for (const warning of results.warnings) {
-                                const { author, userID, timestamp, reason, infrType, infrID } = warning;
-                                infr = parseInt(infrID, 10);
+                            let reply = ' '
+                            var infr
+                            if (results.warnings.length != 0) {
+                                for (const warning of results.warnings) {
+                                    const { author, userID, timestamp, reason, infrType, infrID } = warning
+                                    infr = parseInt(infrID, 10)
+                                }
+                                infrID += parseInt(infr, 10)
                             }
-                            infrID += parseInt(infr, 10);
                         }
                     } finally {
-                        mongoose.connection.close();
+                        mongoose.connection.close()
                     }
                 })
 
@@ -65,7 +67,8 @@ module.exports = {
                     reason,
                     infrType,
                     infrID
-                };
+                }
+
 
                 const embedMsg = new Discord.MessageEmbed()
                     .setColor('#ff0000')
@@ -76,11 +79,11 @@ module.exports = {
                     .addFields({ name: 'Reason:', value: `${reason}` });
 
                 message.channel.send(embedMsg);
-                target.send(embedMsg);
+                target.send(embedMsg)
 
                 await mongo().then(async mongoose => {
                     try {
-                        await warnSchema.findOneAndUpdate({
+                        await warnShema.findOneAndUpdate({
                             guildId,
                         }, {
                             guildId,
@@ -91,7 +94,7 @@ module.exports = {
                             upsert: true
                         })
                     } finally {
-                        mongoose.connection.close();
+                        mongoose.connection.close()
                     }
                 })
             }

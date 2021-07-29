@@ -7,6 +7,7 @@ module.exports = {
   name: 'mute',
   description: 'mutes the mentioned user in a guild',
   syntax: '!mute <user>',
+  permissions: ['VIEW_AUDIT_LOG'],
   async execute(client, message, args, Discord) {
     const modOrAdmin = message.member.hasPermission('KICK_MEMBERS');
     const sLogsChannel = message.guild.channels.cache.find(chn => chn.name === 'server-logs')
@@ -28,6 +29,7 @@ module.exports = {
 
         }
         else {
+          // memberTarget.roles.remove(mainRole.id);
           memberTarget.roles.add(mutedRole.id)
 
 

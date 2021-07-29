@@ -2,6 +2,7 @@ module.exports = {
     name: 'react',
     description: 'Reacts to the message you tagged or it will react to your message. (Using this command.)',
     syntax: '!react',
+    permissions: ['VIEW_CHANNEL'],
     execute(client, message, args, Discord) {
         var i = parseInt('0', 10)
         var emojis = []

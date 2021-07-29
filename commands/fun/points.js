@@ -3,7 +3,9 @@ const pointsSchema = require('../../pointsSchema')
 
 module.exports = {
     name: 'points',
-    description: "Gives points for the jam participants.",
+    slash: false,
+    description: "gives points for the jam participants",
+    permissions: ['KICK_MEMBERS', 'VIEW_CHANNEL'],
     syntax: 'For users:\n !points <user>\nFor staff: !points <number of points>\n',
     async execute(client, message, args, Discord) {
         const target = message.mentions.users.first() || message.guild.members.cache.get(args[0]).user || message.member.user
@@ -46,9 +48,8 @@ module.exports = {
                 }
             })
         }
-        else if (target.bot) return message.channel.send("Bruh what...")
+        else if (target.bot) return message.channel.send("You cannot give points to a bot.")
         else if (isNaN(args[1])) return message.reply('please enter a real number');
-        else if (!message.member.hasPermission('KICK_MEMBERS')) return message.reply('You have no permission.')
         else {
             memberTarget = message.guild.members.cache.get(target.id);
             args.shift();

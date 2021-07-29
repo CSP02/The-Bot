@@ -2,6 +2,7 @@ module.exports = {
     name: 'bam',
     description: 'bam fun command.',
     syntax: '!bam <user>',
+    permissions: ['VIEW_CHANNEL'],
     execute(client, message, args, Discord) {
         target = message.mentions.users.first();
         if (!target) {

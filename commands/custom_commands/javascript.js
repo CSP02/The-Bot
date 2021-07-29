@@ -3,6 +3,7 @@ module.exports = {
     aliases: ['js', 'javascript'],
     description: "Command made for showing JavaScript tutorial links. ",
     syntax: '!learnjs',
+    permissions:['VIEW_CHANNEL'],
     execute(client, message, args, Discord) {
 
         const embed = new Discord.MessageEmbed()
