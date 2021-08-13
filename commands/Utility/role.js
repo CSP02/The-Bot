@@ -39,14 +39,14 @@ module.exports = {
 						const embmsg = new Discord.MessageEmbed()
 							.setColor('#f0fc03')
 							.setDescription(`Role ${myRole} is added to.\n Also welcome, new staff.`)
-						message.channel.send(embmsg)
+						message.channel.send({ embeds: [embmsg] })
 					} else if (!permissions.VIEW_AUDIT_LOG) {
 						console.log("working")
 						message.member.roles.add(myRole).catch(console.error);
 						const embmsg = new Discord.MessageEmbed()
 							.setColor('#f0fc03')
 							.setDescription(`Role ${myRole} is added to you hope you like it.`)
-						message.channel.send(embmsg)
+						message.channel.send({ embeds: [embmsg] })
 
 					} else {
 						message.reply("These Roles are prohibited.")
@@ -60,7 +60,7 @@ module.exports = {
 				.setColor("#19fff0")
 				.addFields
 				({ name: "Roles in this server are:", value: `${serverRoles}` })
-			message.channel.send(embdMsg);
+			message.channel.send({ embeds: [embdMsg] });
 		}
 	}
 }

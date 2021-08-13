@@ -34,6 +34,6 @@ module.exports = {
                 { name: 'Roles:', value: `${serverRoles}` },
                 { name: 'Teams:', value: `${serverTeams}` }
             );
-        message.channel.send(embedMsg)
+        message.channel.send({ embeds: [embedMsg] })
     }
 }

@@ -15,7 +15,7 @@ module.exports = {
                         .setColor('#C155FF')
                         .setTitle('__Role__:')
                         .addFields({ name: 'Role successfully removed', value: `${myRole}` },)
-                    message.channel.send(embedMsg);
+                    message.channel.send({ embeds: [embedMsg] });
                 }
                 else if (message.guild.roles.cache.find(role => role.name === `Team ${args.slice(0).join(" ").toLowerCase()}`)) {
                     message.channel.send("No such team found in this server.")

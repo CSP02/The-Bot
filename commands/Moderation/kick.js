@@ -17,7 +17,7 @@ module.exports = {
         if (target) {
             if (args[1]) {
                 const memberTarget = message.guild.members.cache.get(target.id);
-                if (memberTarget.hasPermission('KICK_MEMBERS')) { message.reply("You can't do that, but nice try though.") }
+                if (memberTarget.permissions.has('KICK_MEMBERS')) { message.reply("You can't do that, but nice try though.") }
                 else {
                     memberTarget.kick();
 
@@ -73,9 +73,9 @@ module.exports = {
                         .addFields(
                             { name: 'Reason:', value: `${args.slice(1).join(" ")}` }
                         )
-                    message.channel.send(embedMsg);
+                    message.channel.send({ embeds: [embedMsg] });
                     memberTarget.send(`You were kicked from the server:\n**${message.guild.name}** Because:\n**${args.slice(2).join(" ")}**. Take care.`)
-                    sLogsChannel.send(embedMsg)
+                    sLogsChannel.send({ embed: [embedMsg] })
                     await mongo().then(async mongoose => {
                         try {
                             await warnShema.findOneAndUpdate({

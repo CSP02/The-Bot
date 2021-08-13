@@ -5,91 +5,65 @@ module.exports = {
   description: 'Lists the commands of the bot.',
   syntax: '!help <module>',
   permissions: ['VIEW_CHANNEL'],
+
   execute(client, message, args, Discord) {
+    var embedMsg = new Discord.MessageEmbed()
+      .setTitle('Help')
+      .setColor('#00ff00');
+    const command_files = fs
+      .readdirSync('./commands/')
+      .filter(file => file.endsWith(''));
     if (!args[0]) {
-      const embedMsg = new Discord.MessageEmbed()
-        .setTitle('Help:')
-        .setColor('#00ff00')
+      var menu = new Discord.MessageSelectMenu()
+        .setCustomId(`Help`)
+        .setPlaceholder('Select Module')
+    } else {
+      var menu = null
+    }
+    for (const folder of command_files) {
+      const description = require(`../../commands/${folder}/description.js`)
+      if (!args[0]) {
+        embedMsg
+          .addFields({
+            name: `${folder}`, value: `${description.description}`
+          })
 
-      const command_files = fs
-        .readdirSync('./commands/')
-      for (const folder of command_files) {
-        const description = require(`../${folder}/description.js`)
-        desc = description.description
-        embedMsg.addFields(
-          { name: folder, value: `${desc}` }
-        )
+        menu.addOptions({ label: `${folder}`, value: `${folder}` })
       }
-      message.channel.send(embedMsg)
-    } else if (args) {
-      var isMsgSent = false
+      const files = fs
+        .readdirSync(`./commands/${folder}/`)
+        .filter(fil => fil.endsWith('.js'));
 
-      if (!(fs.existsSync(`./commands/${args[0].toLowerCase()}/`))) {
-        const command_files = fs
-          .readdirSync('./commands/')
-
-        for (const folder of command_files) {
-          const files = fs
-            .readdirSync(`./commands/${folder}/`)
-            .filter(file => file.endsWith('.js'))
-          for (const file of files) {
-            if (file) {
-              const command = require(`../../commands/${folder}/${file}`);
-              if (command.name) {
-                if (command.name == `${args[0].toLowerCase()}`) {
-                  isMsgSent = true
-                  const embedMsg = new Discord.MessageEmbed()
-                    .setTitle(`${command.name}`)
-                    .setColor('#00ff00')
-
-
-                    .addFields(
-                      { name: `description`, value: `${command.description}` },
-                      { name: `syntax`, value: `${command.syntax}` },
-                      { name: `aliases`, value: `${command.aliases}` },
-                      { name: `Other details:`, value: `${command.others}\n${command.footer}` }
-                    )
-                  message.channel.send(embedMsg)
-                  break;
-                }
-              } else {
-                continue
-              }
-            }
-          }
-          if (isMsgSent) {
-            break
-          } else {
-            continue
-          }
-        }
-        if (!isMsgSent) {
-          message.channel.send('Command not found!')
-        }
-      } else {
-        const embedMsg = new Discord.MessageEmbed()
-          .setTitle('Help:')
-          .setColor('#00ff00')
-        const files = fs
-          .readdirSync(`./commands/${args[0].toLowerCase()}/`)
-          .filter(file => file.endsWith('.js'))
-        for (const file of files) {
-          if (file) {
-            const command = require(`../../commands/${args[0].toLowerCase()}/${file}`);
-            console.log(command.name)
-            if (command.name) {
-              embedMsg.addFields(
-                { name: `${command.name}\n`, value: `${command.description}` }
-              )
-            } else {
-              continue
+      for (const file of files) {
+        const command = require(`../../commands/${folder}/${file}`);
+        if (command) {
+          if (command.name) {
+            if (args[0] === command.name) {
+              embedMsg
+                .addFields(
+                  { name: `Command Name:`, value: `${command.name}` },
+                  { name: `Description`, value: `${command.description}` },
+                  { name: `Syntax`, value: `${command.syntax}` }
+                )
             }
           } else {
-            message.channel.send('Module not found')
+            continue;
           }
+        } else {
+          message.channel.send('No     module or command found.');
         }
-        message.channel.send(embedMsg)
       }
     }
+    if (menu) {
+      const actionRow = new Discord.MessageActionRow()
+        .addComponents(
+          menu
+        )
+      return message.channel.send({ content: "use !help <command_name> to know about a certain command and select a module from the dropdown below", embeds: [embedMsg], components: [actionRow] });
+
+    }
+    else
+      return message.channel.send({ embeds: [embedMsg] });
+
   }
-}
+};

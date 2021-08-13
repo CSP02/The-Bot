@@ -25,7 +25,7 @@ module.exports = {
 
 
         async function Warn(target) {
-            if (target.hasPermission('ADMINISTRATOR') && !message.member.hasPermission('ADMINISTRATOR')) return message.reply('You cannot, be a good mod.')
+            if (target.permissions.has('ADMINISTRATOR') && !message.member.permissions.has('ADMINISTRATOR')) return message.reply('You cannot, be a good mod.')
             else {
                 const guildId = message.guild.id;
                 const userId = target.id;
@@ -78,8 +78,8 @@ module.exports = {
                     .setFooter(`Infraction ID: ${infrID}`)
                     .addFields({ name: 'Reason:', value: `${reason}` });
 
-                message.channel.send(embedMsg);
-                target.send(embedMsg)
+                message.channel.send({ embeds: [embedMsg] });
+                target.send({ embeds: [embedMsg] })
 
                 await mongo().then(async mongoose => {
                     try {

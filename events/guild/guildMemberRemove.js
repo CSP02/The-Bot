@@ -1,4 +1,5 @@
 module.exports = (Discord, client, guildMember) => {
+    console.log("left")
     const serverLogsChn = guildMember.guild.channels.cache.find(chn => chn.name === 'server-logs')
     const embedMsg = new Discord.MessageEmbed()
         .setColor('#ff0000')
@@ -8,5 +9,5 @@ module.exports = (Discord, client, guildMember) => {
         .addFields(
             { name: 'userID:', value: `${guildMember.user.id}` }
         )
-    serverLogsChn.send(embedMsg).catch(console.error)
+    serverLogsChn.send({ embeds: [embedMsg] }).catch(console.error)
 }

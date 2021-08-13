@@ -1,10 +1,10 @@
 module.exports = {
-
+    slash: false,
     name: 'discordjs',
-    description: "Displays the link for learning discord.js.",
+    description: "Displays the link for learning discord.js ",
     aliases: ['discordjs', 'learndjs', 'djs'],
+    permissions: ['VIEW_CHANNEL'],
     syntax: '!learndjs',
-    permissions:['VIEW_CHANNEL'],
     execute(client, message, args, Discord) {
 
         const embedMsg = new Discord.MessageEmbed()
@@ -26,8 +26,8 @@ module.exports = {
 
             .setThumbnail("https://i.ibb.co/7th2xwt/images.png")
 
-            .setFooter('See github repository of the atelier bot by using !gh command. Enjoy learning Discord-js and make your own custom bot. 😃')
+            .setFooter('See github repository of the atelier bot by using !gh command. Enjoy learning Discord-js and make your own custom bot 😃 .')
 
-        message.channel.send(embedMsg);
+        message.channel.send({ embeds: [embedMsg] });
     }
 }

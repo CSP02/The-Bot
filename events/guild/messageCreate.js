@@ -1,8 +1,11 @@
 module.exports = (Discord, client, message) => {
 	const prefix = '!';
+	require('dotenv').config();
+	const devPrefix = process.env.devPrefix
 
 	const words = [
-		//words you want to ban in your server nwords are default
+		'nigg',
+		'retard',
 	];
 
 
@@ -20,8 +23,12 @@ module.exports = (Discord, client, message) => {
 		}
 	}
 
+
+	const checkDev = (message.content.startsWith(devPrefix) && message.channel.name === 'bot-test')
+
 	if (!message.content.startsWith(prefix) || message.author.bot) {
-		return;
+		if (!checkDev)
+			return;
 	}
 
 	if (message.channel.type === 'dm') return message.reply("Sorry! Iam not for dms.")
@@ -38,9 +45,22 @@ module.exports = (Discord, client, message) => {
 					const authorPerms = message.channel.permissionsFor(message.author);
 					if (!authorPerms || !authorPerms.has(command.permissions)) {
 						return message.channel.send('Access Denied!')
-					} else {
+					} else if (message.content.startsWith(prefix) && (command.isInDev === false || !command.isInDev)) {
+						console.log("Working normal prefix")
 						command.execute(client, message, args, Discord);
+						return
 					}
+					else {
+						if (command.isInDev && message.channel.name === 'bot-test' && message.content.startsWith(devPrefix)) {
+							console.log('working dev prefix')
+							command.execute(client, message, args, Discord)
+							return
+						} else {
+							return message.channel.send('This command is not in development, use normal prefix ``!`` ');
+						}
+					}
+				} else {
+					command.execute(client, message, args, Discord)
 				}
 			}
 			else

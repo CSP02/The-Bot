@@ -1,12 +1,7 @@
 module.exports = (Discord, client, guild) => {
     let chn
     const everyoneRole = guild.roles.everyone
-    everyoneRole.setPermissions(0)
-    const embedMsg = new Discord.MessageEmbed()
-        .setTitle('An important notice to the owner of this server!')
-        .setDescription('The-Bot contains a special muting system where members of the server can be muted by using ``!mute`` command if they broke any rule. This will add a new role to the mentioned member and they cannot speak in the server for the mentioned time period. So to make this possible the permissions of the roles are based on @everyone role so make sure you disabled all the permissions expect VIEW_CHANNEL permission. But this feature is still in development. This is so important. We are trying to make it automatically it might available from next update.\n\n Thank you')
-        .setFooter('~The-Bot developer.')
-    guild.owner.send(embedMsg).catch(console.error)
+    everyoneRole.setPermissions('VIEW_CHANNEL')
     guild.channels.create('server-logs', {
         type: 'text',
         permissionOverwrites: [
@@ -18,15 +13,12 @@ module.exports = (Discord, client, guild) => {
     }).catch(console.error)
 
     guild.roles.create({
-        data: {
-            name: 'member',
-            color: 'GREY',
-        },
+        name: 'member',
+        color: 'GREY',
+
     }).catch(console.error)
     guild.roles.create({
-        data: {
-            name: 'Muted',
-            color: 'GREY',
-        },
+        name: 'Muted',
+        color: 'GREY',
     }).catch(console.error)
 }

@@ -1,12 +1,13 @@
 module.exports = {
     name: 'bam',
-    description: 'bam fun command.',
-    syntax: '!bam <user>',
+    slash: false,
+    description: 'bam fun command',
     permissions: ['VIEW_CHANNEL'],
+    syntax: '!bam <user>',
     execute(client, message, args, Discord) {
         target = message.mentions.users.first();
         if (!target) {
-            message.reply("Mention a user bish")
+            message.reply("mention a user bish.")
         } else if (!args[1]) {
             message.reply("Provide a reason bish")
         } else {
@@ -19,7 +20,7 @@ module.exports = {
                     name: 'Reason:',
                     value: `${args.slice(1).join(' ')}`
                 });
-            message.channel.send(embedMsg);
+            message.channel.send({ embeds: [embedMsg] });
         }
     }
 }

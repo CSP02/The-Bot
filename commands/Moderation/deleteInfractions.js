@@ -3,7 +3,7 @@ const schema = require('../../schema')
 
 module.exports = {
     name: 'deleteinfraction',
-    description: 'sends warning details by infraction ids',
+    description: 'deletes the infraction by its id',
     aliases: ['delinfr', 'di'],
     permissions: ['VIEW_AUDIT_LOG'],
     syntax: '!di <infrID>',
@@ -60,6 +60,6 @@ module.exports = {
             }
         })
         if (athr == '') return message.channel.send("No warning was found for the given infraction ID.")
-        else return message.channel.send(embdmsg)
+        else return message.channel.send({ embeds: [embdmsg] })
     }
 }

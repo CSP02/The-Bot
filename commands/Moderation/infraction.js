@@ -25,32 +25,32 @@ module.exports = {
                 const results = await schema.findOne({
                     guildId
                 })
-                msg.resolve(messId).edit('Connection successfull!\nSearching the mentioned Infractions.\n')
-                if (results === null) return msg.resolve(messId).edit("No warnings are found in this server.")
+                msg.channel.send('Connection successfull!\nSearching the mentioned Infractions.\n')
+                if (results === null) return message.channel.send("No warnings are found in this server.")
                 else {
                     let resn = ' '
                     let athr = ' '
                     let target = ' '
                     let infrId = 'Infraction ID: '
                     let infrTp = ' '
-                    let mem = message.guild.members.cache
                     let isInfrId = false
                     let isUserId = false
 
                     for (const warning of results.warnings) {
                         const { author, userID, timestamp, reason, infrType, infrID } = warning
+
                         if (args[0] && !isNaN(args[0])) {
                             if (infrID == args[0]) {
-                                athr += `${mem.get(author)}`
+                                athr += `<@${author}>`
                                 resn += `${reason}`
-                                target += `${mem.get(userID)}`
+                                target += `<@${userID}>`
                                 infrId += infrID
                                 infrTp += `${infrType}`
                                 isInfrId = true
 
-                            } else if (mem.get(args[0])) {
+                            } else if (message.client.users.cache.get(args[0])) {
                                 if (userID == args[0]) {
-                                    target = `${mem.get(userID)}`
+                                    target = `<@${userID}>`
                                     infrId += infrID + ', '
                                 }
                                 isUserId = true
@@ -58,7 +58,7 @@ module.exports = {
                         } else if (message.mentions.users.first()) {
                             const mentUserId = message.mentions.users.first().id
                             if (userID == mentUserId) {
-                                target = `${mem.get(userID)}`
+                                target = `<@${userID}>`
                                 infrId += infrID + ', '
                                 isUserId = true
                             }
@@ -70,25 +70,25 @@ module.exports = {
                     }
                     if (isInfrId) {
                         if ((athr == ' ' || resn == ' ' || target == ' ')) {
-                            msg.resolve(messId).edit(`There is no warning with infraction id ${args[0]}`)
+                            message.channel.send(`There is no warning with infraction id ${args[0]}`)
                         } else {
                             const embdmsg = new Discord.MessageEmbed()
                                 .setTitle('Infraction')
                                 .setColor('#ff0000')
-                                .setFooter(`Infraction ID: ${infrId}`)
+                                .setFooter(`${infrId}`)
                                 .addFields(
                                     { name: "Author", value: `${athr}` },
                                     { name: 'User', value: `${target}` },
                                     { name: 'Infraction Type:', value: `${infrTp}` },
                                     { name: 'Reason', value: `${resn}` },
                                 )
-                            msg.resolve(messId).edit('Results Found:')
-                            msg.resolve(messId).edit(embdmsg)
+                            message.channel.send({ content: 'Results Found:', embeds: [embdmsg] })
+                            //msg.resolve(messId).edit(embdmsg)
                         }
                         isInfrId = false
                     } else if (isUserId) {
                         if (infrId == ' ' || target == ' ') {
-                            msg.resolve(messId).edit(`There are no infractions for mentioned user.`)
+                            message.channel.send(`There are no infractions for mentioned user.`)
                         } else {
                             const embdmsg = new Discord.MessageEmbed()
                                 .setTitle('Infraction')
@@ -98,8 +98,8 @@ module.exports = {
                                     { name: 'User', value: `${target}` },
                                     { name: 'Infraction IDs', value: `${infrId}` },
                                 )
-                            msg.resolve(messId).edit('Results Found:')
-                            msg.resolve(messId).edit(embdmsg)
+                            message.channel.send({ content: 'Results Found:', embeds: [embdmsg] })
+                            //	msg.resolve(messId).edit(embdmsg)
                         }
                         isUserId = false
                     }

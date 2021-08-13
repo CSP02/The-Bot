@@ -1,4 +1,6 @@
 module.exports = (Discord, client, guildMember) => {
+    console.log("joined")
+
     const serverLogsChn = guildMember.guild.channels.cache.find(chn => chn.name === 'server-logs')
     const server = guildMember.guild
 
@@ -14,5 +16,5 @@ module.exports = (Discord, client, guildMember) => {
         .addFields(
             { name: 'userID:', value: `${guildMember.user.id}` }
         )
-    serverLogsChn.send(embedMsg).catch(console.error)
+    serverLogsChn.send({ embeds: [embedMsg] }).catch(console.error)
 }

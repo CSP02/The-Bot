@@ -9,7 +9,7 @@ module.exports = {
   syntax: '!mute <user>',
   permissions: ['VIEW_AUDIT_LOG'],
   async execute(client, message, args, Discord) {
-    const modOrAdmin = message.member.hasPermission('KICK_MEMBERS');
+    const modOrAdmin = message.member.permissions.has('KICK_MEMBERS');
     const sLogsChannel = message.guild.channels.cache.find(chn => chn.name === 'server-logs')
     const server = message.guild
     const infrType = 'mute'
@@ -22,14 +22,13 @@ module.exports = {
 
 
         memberTarget = message.guild.members.cache.get(target.id)
-        if (memberTarget.hasPermission('MUTE_MEMBERS') && !message.member.hasPermission('ADMINISTRATOR')) {
+        if (memberTarget.permissions.has('MUTE_MEMBERS') && !message.member.permissions.has('ADMINISTRATOR')) {
           message.channel.send('Be a good mod.');
         }
         else if (!args[1]) {
 
         }
         else {
-          // memberTarget.roles.remove(mainRole.id);
           memberTarget.roles.add(mutedRole.id)
 
 
@@ -83,8 +82,8 @@ module.exports = {
             .setFooter(`Infraction ID: ${infrID}`)
             .addFields({ name: 'Reason:', value: `${reason}` },)
 
-          message.channel.send(embedMsg);
-          sLogsChannel.send(embedMsg)
+          message.channel.send({ embeds: [embedMsg] });
+          sLogsChannel.send({ embeds: [embedMsg] })
           memberTarget.send(`You were muted in the server:\n**${message.guild.name}** Because:\n**${reason}**. Take care.`)
 
           await mongo().then(async mongoose => {

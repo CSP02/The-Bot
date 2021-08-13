@@ -16,7 +16,7 @@ module.exports = {
         const target = message.mentions.users.first();
         const memberTarget = message.guild.members.cache.get(target.id) || message.guild.members.cache.get(`${args[0]}`)
         if (target) {
-            if (memberTarget.hasPermission('BAN_MEMBERS')) {
+            if (memberTarget.permissions.has('BAN_MEMBERS')) {
                 console.log('2nd')
                 message.channel.send('Be a good mod').catch(err => {
                     message.channel.send(`${err.message}`)
@@ -80,15 +80,15 @@ module.exports = {
                             value: `${args.slice(1).join(' ')}`
                         });
                     console.log('4th')
-                    message.channel.send(embedMsg).catch(err => {
+                    message.channel.send({ embeds: [embedMsg] }).catch(err => {
                         message.channel.send(`${err.message}`)
                     });
                     console.log('5th')
-                    memberTarget.send(embedMsg).catch(err => {
+                    memberTarget.send({ embeds: [embedMsg] }).catch(err => {
                         message.channel.send(`${err.message}`)
                     });
                     console.log('6th')
-                    sLogsChannel.send(embedMsg).catch(err => {
+                    sLogsChannel.send({ embeds: [embedMsg] }).catch(err => {
                         message.channel.send(`${err.message}`)
                     });
                     console.log('7th')
