@@ -7,6 +7,6 @@ module.exports = {
     permissions: ['VIEW_CHANNEL'],
     execute(client, message, args, Discord) {
 
-        message.channel.send('https://github.com/Chandra-sekhar-pilla/The-Bot');
+        message.channel.send({content:'https://github.com/Chandra-sekhar-pilla/The-Bot'});
     }
 }
