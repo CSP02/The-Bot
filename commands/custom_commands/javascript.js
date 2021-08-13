@@ -1,9 +1,10 @@
 module.exports = {
+    slash: false,
     name: 'learnjs',
     aliases: ['js', 'javascript'],
+    permissions: ['VIEW_CHANNEL'],
     description: "Command made for showing JavaScript tutorial links. ",
     syntax: '!learnjs',
-    permissions:['VIEW_CHANNEL'],
     execute(client, message, args, Discord) {
 
         const embed = new Discord.MessageEmbed()
@@ -37,7 +38,7 @@ module.exports = {
             )
             .setFooter("This list does not contain every resource out there because the internet is huge and listing everything down is impossible.")
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
 
     }
 }
