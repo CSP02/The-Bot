@@ -29,7 +29,7 @@ module.exports = {
             .setTitle('Server Info:')
 
             .addFields({ name: 'Server Name:', value: `${server.name}` }, { name: 'Member Count:', value: `${server.memberCount}` },
-                { name: "Owner:", value: `${server.owner}` },
+                { name: "Owner:", value: `<@${server.ownerId}>` },
                 { name: "Created At:", value: `${server.createdAt}` },
                 { name: 'Roles:', value: `${serverRoles}` },
                 { name: 'Teams:', value: `${serverTeams}` }

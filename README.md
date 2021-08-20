@@ -36,7 +36,7 @@ infraction 	| infr, wi | replies with the warning of the given infraction ID | @
 
 ### Version Info:
 * Optimised code and updated API
-* Fixed bugs while muting and unmuting members.
+* Fixed bugs in ban and bam command.
 
 ### Reference for graph API
 * The API is developed by [@Denzven](https://github.com/denzven) in python. For more information about examples visit [Pythonwhere](https://denzven.pythonanywhere.com/) 
@@ -46,7 +46,7 @@ infraction 	| infr, wi | replies with the warning of the given infraction ID | @
 
 ### Features which may available for next version:
 * Will try to add createcustomcommand(ccc) command to create commands with the help of bot.
-* Will Fix the bugs i current version if it has any.
+* Will Fix the bugs in current version if it has any (please inform if there are any bugs in present code by creating an issue).
 
 ### Command usage:
 ```

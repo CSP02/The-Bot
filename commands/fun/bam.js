@@ -11,11 +11,10 @@ module.exports = {
         } else if (!args[1]) {
             message.reply("Provide a reason bish")
         } else {
-            const memberTarget = message.guild.members.cache.get(target.id);
             const embedMsg = new Discord.MessageEmbed()
                 .setColor('#ff0000')
                 .setTitle('Banned:')
-                .setDescription(`<@${memberTarget.user.id}> has been banned`)
+                .setDescription(`${target} has been banned`)
                 .addFields({
                     name: 'Reason:',
                     value: `${args.slice(1).join(' ')}`
