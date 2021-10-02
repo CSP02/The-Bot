@@ -1,5 +1,5 @@
 # The-Bot
-![The-Bot](https://github.com/Chandra-sekhar-pilla/The-Bot-v2.0.0/tree/main/resouces/the-bot_logo.png)
+![The-Bot](https://github.com/Chandra-sekhar-pilla/The-Bot-v2.0.0/tree/main/resouces/the-bot_logo_for_github.png)
 
 > The default prefix is "!".
 
