@@ -1,7 +1,7 @@
 //MUTE COMMAND
 
-const mongo = require('../../mongo')
-const warnShema = require('../../schema')
+const mongo = require('../../schemas/mongo')
+const warnShema = require('../../schemas/schema')
 
 module.exports = {
   name: 'mute',

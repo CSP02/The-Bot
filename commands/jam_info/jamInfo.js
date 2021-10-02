@@ -1,5 +1,5 @@
-const mongo = require('../../mongo')
-const jamShema = require('../../jamSchema')
+const mongo = require('../../schemas/mongo')
+const jamShema = require('../../schemas/jamSchema')
 
 module.exports = {
 	name:'jaminfo',

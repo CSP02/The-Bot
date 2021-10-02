@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const { Intents } = require('discord.js')
 require('dotenv').config();
+const { replies } = require('./schemas/CustomStatus.js')
 const mongoose = require('mongoose')
 mongoose.connect('your mongo path here', { useNewUrlParser: true, useUnifiedTopology: true })
 const keepAlive = require('./server.js');
@@ -9,6 +10,15 @@ const client = new Discord.Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAG
 client.command = new Discord.Collection();
 client.events = new Discord.Collection();
 
+setInterval(SetStatus, 120000)
+
+function SetStatus() {
+    const random = Math.floor(Math.random() * replies.length);
+    client.user.setActivity(`${replies[random]}`, {
+        type: "PLAYING",
+    });
+    console.log(`status set to ${replies[random]}`)
+}
 
 
 ['command_handler', 'event_handler'].forEach(handler => {

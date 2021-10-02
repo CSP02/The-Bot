@@ -1,7 +1,7 @@
 //INFRACTIONS COMMAND
 
-const mongo = require('../../mongo')
-const schema = require('../../schema')
+const mongo = require('../../schemas/mongo')
+const schema = require('../../schemas/schema')
 
 module.exports = {
     name: 'infraction',

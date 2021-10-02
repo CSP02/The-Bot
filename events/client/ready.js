@@ -3,6 +3,5 @@ module.exports = (Discord, client) => {
     console.log('The bot is online');
     client.user.setActivity("Helping\n(!help)", {
     type: "PLAYING",
-    
     });
   }
