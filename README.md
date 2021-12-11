@@ -36,8 +36,9 @@ infraction 	| infr, wi | replies with the warning of the given infraction ID | @
 > Inorder to know more about the commands join my discord server.
 
 ### Version Info:
-* Optimised code and updated API
-* Fixed bugs in ban and bam command.
+* Added Slash Commands (a few but will release a minor release after adding more slash commands),
+* Added error handling which sends a embed message to the channel describing the error,
+* Refined interactionCreate which accepts the slash commands interaction.
 
 ### Reference for graph API
 * The API is developed by [@Denzven](https://github.com/denzven) in python. For more information about examples visit [Pythonwhere](https://denzven.pythonanywhere.com/) 

@@ -7,63 +7,80 @@ module.exports = {
   permissions: ['VIEW_CHANNEL'],
 
   execute(client, message, args, Discord) {
-    var embedMsg = new Discord.MessageEmbed()
-      .setTitle('Help')
-      .setColor('#00ff00');
-    const command_files = fs
-      .readdirSync('./commands/')
-      .filter(file => file.endsWith(''));
-    if (!args[0]) {
-      var menu = new Discord.MessageSelectMenu()
-        .setCustomId(`Help`)
-        .setPlaceholder('Select Module')
-    } else {
-      var menu = null
-    }
-    for (const folder of command_files) {
-      const description = require(`../../commands/${folder}/description.js`)
+    try {
+      var embedMsg = new Discord.MessageEmbed()
+        .setTitle('Help')
+        .setColor('#00ff00');
+      const command_files = fs
+        .readdirSync('./commands/')
+        .filter(file => file.endsWith('')).filter(file => file != 'EasterEggs');
       if (!args[0]) {
-        embedMsg
-          .addFields({
-            name: `${folder}`, value: `${description.description}`
-          })
-
-        menu.addOptions({ label: `${folder}`, value: `${folder}` })
+        var menu = new Discord.MessageSelectMenu()
+          .setCustomId(`Help`)
+          .setPlaceholder('Select Module')
+      } else if (command_files.includes(`${args[0]}`)) {
+        const warnEmbed = new Discord.MessageEmbed()
+          .setTitle("**Info:**")
+          .setColor('#ffc508')
+          .setDescription("Use dropdown to select module. Use !help command to get module names and dropdown.")
+        return message.channel.send({ embeds: [warnEmbed] })
+      } else {
+        var menu = null
       }
-      const files = fs
-        .readdirSync(`./commands/${folder}/`)
-        .filter(fil => fil.endsWith('.js'));
+      for (const folder of command_files) {
+        const description = require(`../../commands/${folder}/description.js`)
+        if (!args[0]) {
+          embedMsg
+            .addFields({
+              name: `${folder}`, value: `${description.description}`
+            })
 
-      for (const file of files) {
-        const command = require(`../../commands/${folder}/${file}`);
-        if (command) {
-          if (command.name) {
-            if (args[0] === command.name) {
-              embedMsg
-                .addFields(
-                  { name: `Command Name:`, value: `${command.name}` },
-                  { name: `Description`, value: `${command.description}` },
-                  { name: `Syntax`, value: `${command.syntax}` }
-                )
+          menu.addOptions({ label: `${folder}`, value: `${folder}` })
+        }
+        const files = fs
+          .readdirSync(`./commands/${folder}/`)
+          .filter(fil => fil.endsWith('.js'));
+
+        for (const file of files) {
+          const command = require(`../../commands/${folder}/${file}`);
+          if (command) {
+            if (command.name) {
+              if (args[0] === command.name) {
+                embedMsg
+                  .addFields(
+                    { name: `Command Name:`, value: `${command.name}` },
+                    { name: `Description`, value: `${command.description}` },
+                    { name: `Syntax`, value: `${command.syntax}` },
+                    { name: `Aliases`, value: `${command.aliases}` },
+                    { name: `Other Details`, value: `${command.others ? `${command.others}` : 'undefined'}` },
+                    { name: `Note:`, value: `${command.footer ? `${command.footer}` : 'undefined'}` }
+                  )
+              }
+            } else {
+              continue;
             }
           } else {
-            continue;
+            message.channel.send('No     module or command found.');
           }
-        } else {
-          message.channel.send('No     module or command found.');
         }
       }
-    }
-    if (menu) {
-      const actionRow = new Discord.MessageActionRow()
-        .addComponents(
-          menu
-        )
-      return message.channel.send({ content: "use !help <command_name> to know about a certain command and select a module from the dropdown below", embeds: [embedMsg], components: [actionRow] });
+      if (menu) {
+        const actionRow = new Discord.MessageActionRow()
+          .addComponents(
+            menu
+          )
+        return message.channel.send({ content: "use !help <command_name> to know about a certain command and select a module from the dropdown below", embeds: [embedMsg], components: [actionRow] });
 
-    }
-    else
-      return message.channel.send({ embeds: [embedMsg] });
+      }
+      else
+        return message.channel.send({ embeds: [embedMsg] });
 
+    } catch (e) {
+      const emd = new Discord.MessageEmbed()
+        .setColor('#ff0000')
+        .setTitle('command raised an error in the source code:')
+        .setDescription(`\`\`\`${e}\`\`\`\n\nYou can crease a issue report here https://github.com/Chandra-sekhar-pilla/The-Bot-v2.0.0`)
+      message.channel.send({ embeds: [emd] })
+    }
   }
-};
+}

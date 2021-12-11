@@ -3,27 +3,16 @@ const { Intents } = require('discord.js')
 require('dotenv').config();
 const { replies } = require('./schemas/CustomStatus.js')
 const mongoose = require('mongoose')
-mongoose.connect('your mongo path here', { useNewUrlParser: true, useUnifiedTopology: true })
-const keepAlive = require('./server.js');
 
-const client = new Discord.Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES], partials: ['GUILD_MEMBERS', 'MESSAGE', 'CHANNEL', 'REACTION'] })
+mongoose.connect(process.env.MONGOPATH, { useNewUrlParser: true, useUnifiedTopology: true })
+const keepAlive = require('./server.js');
+const client = new Discord.Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES], partials: ['GUILD_MEMBERS', 'MESSAGE', 'CHANNEL', 'REACTION', 'USER'] })
+
 client.command = new Discord.Collection();
 client.events = new Discord.Collection();
 
-setInterval(SetStatus, 120000)
-
-function SetStatus() {
-    const random = Math.floor(Math.random() * replies.length);
-    client.user.setActivity(`${replies[random]}`, {
-        type: "PLAYING",
-    });
-    console.log(`status set to ${replies[random]}`)
-}
-
-
-['command_handler', 'event_handler'].forEach(handler => {
+['slash_commands_handler', 'command_handler', 'event_handler'].forEach(handler => {
     require(`./handlers/${handler}`)(client, Discord);
 });
-
 keepAlive;
-client.login('bot token here').catch(console.error);
+client.login(process.env.TOKEN);
