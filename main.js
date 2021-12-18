@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const { Intents } = require('discord.js')
 require('dotenv').config();
-const { replies } = require('./schemas/CustomStatus.js')
 const mongoose = require('mongoose')
 
 mongoose.connect(process.env.MONGOPATH, { useNewUrlParser: true, useUnifiedTopology: true })

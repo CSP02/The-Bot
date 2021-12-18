@@ -31,11 +31,7 @@ module.exports = {
                 }
             }
         } catch (e) {
-            const emd = new Discord.MessageEmbed()
-                .setColor('#ff0000')
-                .setTitle('command raised an error in the source code:')
-                .setDescription(`\`\`\`${e}\`\`\`\n\nYou can crease a issue report here https://github.com/Chandra-sekhar-pilla/The-Bot-v2.0.0`)
-            message.channel.send({ embeds: [emd] })
+            require(`../../handlers/ErrorHandler.js`)(client, message, Discord, e, this.name)
         }
     }
 }
