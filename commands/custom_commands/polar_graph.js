@@ -9,16 +9,17 @@ module.exports = {
     async execute(client, message, args, Discord) {
         var i = 0
         var python_anywhere_beta_BASEURL = "http://denzven.pythonanywhere.com/DenzGraphingApi/v1/polar_graph/test/plot"
-        for (e in args){
-            if (i == 0){
+        for (e in args) {
+            if (i == 0) {
                 var equation = encodeURIComponent(`${args[e]}`)
                 python_anywhere_beta_BASEURL = python_anywhere_beta_BASEURL + `?formula=${equation}`
-                i += 1     
+                i += 1
             }
-            else{
+            else {
                 python_anywhere_beta_BASEURL = python_anywhere_beta_BASEURL + `&${args[e]}`
             }
         
-    }
+        }
         await message.channel.send(python_anywhere_beta_BASEURL);
+    }
 }
