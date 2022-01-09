@@ -1,5 +1,5 @@
 # The-Bot
-![The-Bot](./resouces/the-bot_logo_for_github.png "The-Bot")
+![The-Bot](./resouces/THE_BOT(logo2).png "The-Bot")
 
 > The default prefix is "!".
 
