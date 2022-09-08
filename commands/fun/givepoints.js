@@ -1,14 +1,15 @@
 const mongo = require('../../schemas/mongo')
 const pointsSchema = require('../../schemas/pointsSchema')
+const { PermissionsBitField } = require('discord.js');
 
 module.exports = {
 	name: 'givepoints',
 	aliases: ['gp', 'give'],
 	description: "gives points for the jam participants",
 	syntax: '!give <user>',
-	permissions: ['BAN_MEMBERS'],
+	permissions: [PermissionsBitField.Flags.BanMembers],
 	async execute(client, message, args, Discord) {
-		try {
+		try{
 			const guildId = message.guild.id
 			const mem = message.mentions.users.first()
 			console.log(message.author.id)
@@ -19,7 +20,7 @@ module.exports = {
 			await mongo().then(async mongoose => {
 				try {
 					const results = await pointsSchema.findOne({
-						guildId
+						guildId: guildId
 					})
 					if (results !== null) {
 						for (const givenPoint of results.points) {
@@ -40,11 +41,11 @@ module.exports = {
 										await pointsSchema.findOneAndUpdate({
 											guildId
 										}, {
-											guildId,
-											$pull: {
-												points: givenPoint
-											}
-										})
+												guildId,
+												$pull: {
+													points: givenPoint
+												}
+											})
 									} finally {
 										mongoose.connection.close()
 									}
@@ -69,15 +70,15 @@ module.exports = {
 				point: point,
 			}
 
-			const embedMsg = new Discord.MessageEmbed()
+			const embedMsg = new Discord.EmbedBuilder()
 				.setTitle('Points')
-				.setFooter('Points were given')
+				.setFooter({ text:  'Points were given'})
 				.setColor('#00ff00')
-				.addFields(
+				.addFields([
 					{ name: 'User:', value: `<@${mem.id}>` },
 					{ name: 'Points:', value: `${args[1]}` },
 					{ name: 'Total Points:', value: `${point}` }
-				)
+				])
 				.setThumbnail(mem.avatarURL(true))
 
 			await mongo().then(async mongoose => {
@@ -86,19 +87,19 @@ module.exports = {
 					await pointsSchema.findOneAndUpdate({
 						guildId,
 					}, {
-						guildId,
-						$push: {
-							points: points
-						}
-					}, {
-						upsert: true
-					})
+							guildId,
+							$push: {
+								points: points
+							}
+						}, {
+							upsert: true
+						})
 				} finally {
 					mongoose.connection.close()
 				}
 			})
 			message.channel.send({ embeds: [embedMsg] })
-		} catch (e) {
+		}catch(e){
 			require(`../../handlers/ErrorHandler.js`)(client, message, Discord, e, this.name)
 		}
 	}

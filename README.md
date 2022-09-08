@@ -8,7 +8,6 @@
 
 
 > The default prefix is "!".
-
 (Prefix is same for every Guild/Server will release an update to make it able to change for different guilds.)
 
 * It is a discord bot for moderation.
@@ -40,7 +39,6 @@ warn 		| - | warns the mentioned member 	| @staff
 infraction 	| infr, wi | replies with the warning of the given infraction ID | @staff
 
 > Inorder to know more about the commands join my discord server.
-
 ### Version Info:
 * Added Slash Commands (a few but will release a minor release after adding more slash commands),
 * Added error handling which sends a embed message to the channel describing the error,
@@ -59,7 +57,6 @@ infraction 	| infr, wi | replies with the warning of the given infraction ID | @
 ### Command usage:
 ```
 Example:
-
 You:
 !ping
 The bot:

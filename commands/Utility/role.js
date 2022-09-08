@@ -1,11 +1,12 @@
+const { PermissionsBitField } = require('discord.js');
 module.exports = {
 	name: 'role',
 	aliases: ['giverole', 'role'],
 	description: 'adds the mentioned role to the member who used this command',
 	syntax: '!role <role>',
-	permissions: ['VIEW_CHANNEL'],
+	permissions: [PermissionsBitField.Flags.ViewChannel],
 	execute(client, message, args, Discord) {
-		try {
+		try{
 			serverRoles = ""
 			message.guild.roles.cache.forEach(roles => {
 				if (/[A-Z]/.test((roles.name)[0]) || roles.name == '@everyone') {
@@ -37,14 +38,14 @@ module.exports = {
 
 							console.log("Working!")
 							message.member.roles.add(myRole).catch(console.error);
-							const embmsg = new Discord.MessageEmbed()
+							const embmsg = new Discord.EmbedBuilder()
 								.setColor('#f0fc03')
 								.setDescription(`Role ${myRole} is added to.\n Also welcome, new staff.`)
 							message.channel.send({ embeds: [embmsg] })
 						} else if (!permissions.VIEW_AUDIT_LOG) {
 							console.log("working")
 							message.member.roles.add(myRole).catch(console.error);
-							const embmsg = new Discord.MessageEmbed()
+							const embmsg = new Discord.EmbedBuilder()
 								.setColor('#f0fc03')
 								.setDescription(`Role ${myRole} is added to you hope you like it.`)
 							message.channel.send({ embeds: [embmsg] })
@@ -56,15 +57,16 @@ module.exports = {
 					}
 				}
 			} else {
-				const embdMsg = new Discord.MessageEmbed()
+				const embdMsg = new Discord.EmbedBuilder()
 					.setTitle("Roles:")
 					.setColor("#19fff0")
 					.addFields
 					({ name: "Roles in this server are:", value: `${serverRoles}` })
 				message.channel.send({ embeds: [embdMsg] });
 			}
-		} catch (e) {
+		}catch(e){
 			require(`../../handlers/ErrorHandler.js`)(client, message, Discord, e, this.name)
+
 		}
 	}
 }

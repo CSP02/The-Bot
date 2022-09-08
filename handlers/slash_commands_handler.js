@@ -15,7 +15,6 @@ module.exports = (client, Discord) => {
 	const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
 	try {
-		console.log('Started refreshing application (/) commands.');
 		rest.put(
 			Routes.applicationCommands(process.env.CLIENTID),
 			{ body: commands },

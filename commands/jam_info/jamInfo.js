@@ -13,7 +13,7 @@ module.exports = {
 			await mongo().then(async mongoose => {
 				try {
 					const jamInfo = await jamShema.findOne({
-						guildId,
+						guildId: guildId,
 					})
 					if (jamInfo === null || jamInfo === undefined || jamInfo.jam.length == 0) {
 						return message.channel.send("No jams are registered right now!")
@@ -37,13 +37,14 @@ module.exports = {
 					var seconds = res % 60;
 					const timeRem = `${days} days, ${hours} hrs, ${minutes} min, ${parseInt(seconds)} sec remaining`
 
-					const embedMsg = new Discord.MessageEmbed()
+					const embedMsg = new Discord.EmbedBuilder()
 						.setTitle('Jam info:')
 						.setColor('#ddff00')
 						.addFields(
-							{ name: 'Topic', value: `${topic}` },
+							[{ name: 'Topic', value: `${topic}` },
 							{ name: 'Time Remaining:', value: timeRem },
-							{ name: 'Other Details:', value: `${otherDetails}` })
+							{ name: 'Other Details:', value: `${otherDetails}` }]
+						)
 					message.channel.send({ embeds: [embedMsg] })
 				} finally {
 					mongoose.connection.close()

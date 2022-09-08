@@ -1,18 +1,18 @@
 const mongo = require('../../schemas/mongo')
 const jamShema = require('../../schemas/jamSchema')
+const { PermissionsBitField } = require('discord.js');
 
 module.exports = {
 	name: 'setjam',
 	description: 'Sets the jam info with provided fields',
 	aliases: ['sj', 'setjam'],
 	syntax: '!setjam <time(date-month-year)> <hours:minutes:seconds> <topic> <otherinfo>',
-	permissions: ['ADMINISTRATOR'],
+	permissions: [PermissionsBitField.Flags.Administrator],
 
 	async execute(client, message, args, Discord) {
 		try {
 			const guildId = message.guild.id
 			if (!args[0]) {
-
 				return message.channel.send('Provide time period.')
 			}
 			const timePeriod = `${args[0]}`;
@@ -33,25 +33,25 @@ module.exports = {
 					await jamShema.findOneAndUpdate({
 						guildId,
 					}, {
-						guildId,
-						$push: {
-							jam: jam,
-						}
-					}, {
-						upsert: true
-					})
+							guildId,
+							$push: {
+								jam: jam,
+							}
+						}, {
+							upsert: true
+						})
 				} finally {
 					mongoose.connection.close()
 				}
 			})
 
-			const embedMsg = new Discord.MessageEmbed()
+			const embedMsg = new Discord.EmbedBuilder()
 				.setTitle('Jam registered Successfully:')
 				.setColor('#00ff00')
 				.addFields(
-					{ name: 'Topic:', value: `${jam.topic}` },
+					[{ name: 'Topic:', value: `${jam.topic}` },
 					{ name: 'Deadline:', value: `${new Date(jam.timestamp)}` },
-					{ name: 'Other Details:', value: `${jam.other ? `${jam.other}` : 'no other challenges required'}` }
+					{ name: 'Other Details:', value: `${jam.other ? `${jam.other}` : 'no other challenges required'}` }]
 				)
 
 			message.channel.send({ embeds: [embedMsg] })

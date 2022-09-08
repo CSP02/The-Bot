@@ -11,16 +11,16 @@ module.exports = {
 			const guildId = message.guild.id
 			const mem = message.mentions.users.first()
 			if (!args[0]) return message.channel.send('Mention a user!')
-			const embedMsg = new Discord.MessageEmbed()
+			const embedMsg = new Discord.EmbedBuilder()
 				.setTitle('Points')
 			const author = message.author.id
 			await mongo().then(async mongoose => {
 				try {
 					const results = await pointsSchema.findOne({
-						guildId,
+						guildId: guildId,
 					})
 					if (results === null) {
-						const embedMsg = new Discord.MessageEmbed()
+						const embedMsg = new Discord.EmbedBuilder()
 							.setTitle('Points')
 							.setColor('#ff0000')
 							.setDescription('No events were hosted in this guild.')
@@ -32,12 +32,12 @@ module.exports = {
 						if (user == mem.id) {
 							embedMsg
 								.setDescription('Really amazed')
-								.setFooter('Keep participating in jams and events to get points')
+								.setFooter({text: 'Keep participating in jams and events to get points'})
 								.setColor('#fcc603')
 								.setThumbnail(mem.avatarURL(true))
 								.addFields(
-									{ name: 'User', value: `${mem}` },
-									{ name: 'points', value: `${point}` }
+									[{ name: 'User', value: `${mem}` },
+									{ name: 'points', value: `${point}` }]
 								)
 							return message.channel.send({ embeds: [embedMsg] })
 						} else {

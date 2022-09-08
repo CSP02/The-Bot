@@ -5,10 +5,9 @@ module.exports = {
 	name: 'leaderboard',
 	description: "gives points for the jam participants",
 	syntax: 'For users:\n !points <user>\nFor staff: !points <number of points>\n',
-	InDev: true,
 
 	async execute(client, message, args, Discord) {
-		try {
+		try{
 			const guildId = message.guild.id
 			var largest = parseInt('0', 10)
 			var topMembers = []
@@ -21,10 +20,10 @@ module.exports = {
 				await mongo().then(async mongoose => {
 					try {
 						const results = await pointsSchema.findOne({
-							guildId,
+							guildId: guildId,
 						})
 						if (results === null) {
-							const msgemb = new Discord.MessageEmbed()
+							const msgemb = new Discord.EmbedBuilder()
 								.setColor("#ff0000")
 								.setDescription(`No events were hosted or no one participated in this guild`)
 
@@ -51,7 +50,7 @@ module.exports = {
 								}
 							}
 						}
-						const embdMsg = new Discord.MessageEmbed()
+						const embdMsg = new Discord.EmbedBuilder()
 							.setTitle("Leaderboard")
 							.setColor("#00ff00")
 						for (var l = 0; l < 3; l++) {
@@ -61,7 +60,8 @@ module.exports = {
 							else {
 								embdMsg
 									.addFields(
-										{ name: `${l + parseInt('1', 10)}`, value: `<@${lead[l]}>\nPoints ${leadMember[l]}` })
+										[{ name: `${l + parseInt('1', 10)}`, value: `<@${lead[l]}>\nPoints ${leadMember[l]}` }]
+									)
 							}
 						}
 						message.channel.send({ embeds: [embdMsg] })
@@ -73,8 +73,8 @@ module.exports = {
 			} catch (e) {
 				message.channel.send(e.message)
 			}
-		} catch (e) {
-			require(`../../handlers/ErrorHandler.js`)(client, message, Discord, e, this.name)
+		}catch(e){
+			require(`../../handlers/ErrorHandler.js`)(client, message, Discord, e, this.name)			
 		}
 	}
 }
