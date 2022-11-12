@@ -97,7 +97,7 @@ module.exports = {
 				mongoose.connection.close()
 			}
 		})
-		const embed = new Discord.MessageEmbed()
+		const embed = new Discord.EmbedBuilder()
 			.setTitle('Gift received')
 			.setColor(`${colors[randomIndex]}`)
 			.setDescription(`<@${userID}> has send you a ${gift} which is ${giftRate}CCs(chistmas coins).`)
