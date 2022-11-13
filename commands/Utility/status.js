@@ -8,21 +8,18 @@ module.exports = {
     aliases: ['status', 'botstatus', 'uptime'],
     permissions: [PermissionsBitField.Flags.ViewChannel],
     async execute(client, message, args, Discord) {
-        puppeteer
-            .launch({
-                defaultViewport: {
-                    width: 1280,
-                    height: 860,
-                },
-            })
-            .then(async (browser) => {
-                const page = await browser.newPage();
-                await page.goto("https://stats.uptimerobot.com/5VY3YFMLXL");
-                await page.screenshot({ path: "BotStatus.png" });
-                await browser.close();
-                await message.channel.send(
-                    { files: ['BotStatus.png'] }
-                );
-            });
+        var url = 'https://stats.uptimerobot.com/5VY3YFMLXL';
+
+        (async () => {
+            const browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+
+            const page = await browser.newPage();
+            await page.goto(url);
+
+
+            console.log(await page.content());
+            await page.screenshot({ path: 'The-Bot_Status.png' });
+            await message.channel.send({ files: ['The-Bot_Status.png'] });
+        })();
     }
 };
