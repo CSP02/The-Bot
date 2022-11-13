@@ -11,12 +11,6 @@ const client = new Discord.Client({
 	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
 	partials: [Partials.GuildMember, Partials.Message, Partials.Channel, Partials.Reaction, Partials.User]
 })
-setInterval(SetStatus, 12000)
-
-function SetStatus() {
-	const random = Math.floor(Math.random() * replies.length);
-	client.user.setActivity(`${replies[random]}`, { type: ActivityType.Playing, });
-}
 
 client.command = new Discord.Collection();
 client.events = new Discord.Collection();
