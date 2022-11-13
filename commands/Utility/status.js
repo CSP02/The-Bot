@@ -12,12 +12,8 @@ module.exports = {
 
         (async () => {
             const browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-
             const page = await browser.newPage();
             await page.goto(url);
-
-
-            console.log(await page.content());
             await page.screenshot({ path: 'The-Bot_Status.png' });
             await message.channel.send({ files: ['The-Bot_Status.png'] });
         })();
