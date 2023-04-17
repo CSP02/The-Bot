@@ -5,12 +5,16 @@ let commands = []
 require('dotenv').config();
 
 module.exports = (client, Discord) => {
-	const slashCommandFiles = fs
-		.readdirSync('./SlashCommands/').filter(file => file.endsWith('.js'))
-
-	for (const commandFile of slashCommandFiles) {
-		const command = require(`../SlashCommands/${commandFile}`);
-		commands.push(command.data.toJSON())
+	const slashCommandFolders = fs
+		.readdirSync('./SlashCommands/')
+	for (const commandFolder of slashCommandFolders) {
+		const slashCommandFiles = fs
+			.readdirSync(`./SlashCommands/${commandFolder}/`).filter(file => file.endsWith('.js'))
+		for (const commandFile of slashCommandFiles) {
+			if(commandFile === 'ModuleInfo.js') continue
+			const command = require(`../SlashCommands/${commandFolder}/${commandFile}`);
+			commands.push(command.data.toJSON())
+		}
 	}
 	const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
@@ -18,8 +22,16 @@ module.exports = (client, Discord) => {
 		rest.put(
 			Routes.applicationCommands(process.env.CLIENTID),
 			{ body: commands },
-		)
-		console.log('Successfully reloaded application (/) commands.');
+		).then(() =>{
+			console.log('Successfully reloaded application (/) commands.');
+		})
+
+		// rest.put(
+		// 	Routes.applicationCommands(process.env.CLIENTID),
+		// 	{ body: [] },
+		// ).then(() =>{
+		// 	console.log('Successfully Deleted **all** application (/) commands.');
+		// })
 	} catch (error) {
 		console.error(error);
 	}

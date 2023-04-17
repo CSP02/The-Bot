@@ -1,7 +1,7 @@
 module.exports = {
 	interactTo: ['Little Drummer Boy', 'Rudolph', 'Snowman', 'Santa claus', 'Christmas Elve'],
 	permissions: ['VIEW_CHANNEL'],
-	async execute(client, interaction, args, Discord) {
+	async execute(client, interaction, Discord) {
 		try {
 			const customId = interaction.customId
 			let myRole

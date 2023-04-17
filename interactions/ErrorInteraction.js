@@ -1,10 +1,7 @@
-const fs = require('fs')
-const Discord = require('discord.js')
-
 module.exports = {
 	interactTo: ['Error'],
 	permissions: ['VIEW_CHANNEL'],
-	async execute(client, interaction, args, Discord) {
+	async execute(client, interaction, Discord) {
 		let label
 		let url
 		const md = ['makefile',
