@@ -13,7 +13,15 @@ module.exports = {
 				.setTitle('Server Roles:')
 				.setDescription(`Role ${role} added to ${interaction.member}`)
 
-			if (!role.permissions.VIEW_AUDIT_LOG && !role.id === "852183844705927190") {
+			const isStaff = () => {
+				return role.permissions.has(PermissionsBitField.Flags.ViewAuditLog);
+			}
+
+			const isSpecialRole = () => {
+				return role.permissions.has(PermissionsBitField.Flags.CreatePublicThreads)
+			}
+
+			if (!isStaff && !isSpecialRole && !role.permissions.has(PermissionsBitField.Flags.ChangeNickname) && role.id !== "<id of muted role>" && !role.name.includes("bot") && !role.name.includes("Bot")) {
 				interaction.member.roles.add(role)
 				interaction.reply({ embeds: [embedMsg] })
 			} else {

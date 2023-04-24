@@ -1,10 +1,10 @@
 # The-Bot
-![The-Bot](./resouces/THE-BOTEDITED.png "The-Bot")
+![The-Bot](Resources/The-Bot-logo.png "The-Bot")
 ![issues](https://img.shields.io/github/issues/Chandra-sekhar-pilla/The-Bot)
 ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/The-Bot)
 ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/The-Bot)
 ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/The-Bot)
-![version](https://img.shields.io/badge/Version-4.0.0-green)
+![version](https://img.shields.io/badge/Version-4.0.1-green)
 
 
 > The default prefix is "!".
