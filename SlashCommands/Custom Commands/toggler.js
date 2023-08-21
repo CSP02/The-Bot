@@ -6,6 +6,6 @@ module.exports = {
 		.setDescription('sends the cdn link and docs links for toggler.js'),
 
 	async execute(client, interaction, Discord) {
-		interaction.reply("Link for Toggler CDN:\n https://cdn.jsdelivr.net/gh/Chandra-sekhar-pilla/Toggler@main/Toggler.js\n\nToggler Docs:\nhttps://the-atelier.ml/Pages/Toggler/toggler.html")
+		interaction.reply("[Toggler.js CDN](https://cdn.jsdelivr.net/gh/Chandra-sekhar-pilla/Toggler@main/Toggler.js)\n\n[Toggler Docs](https://csp02.me/The-Atelier/Pages/Toggler/toggler.html)")
 	}
 }  

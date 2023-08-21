@@ -1,4 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
+const wait = require('node:timers/promises').setTimeout;
+
 module.exports = {
 	name: 'clear',
 	data: new SlashCommandBuilder()
@@ -18,6 +20,8 @@ module.exports = {
 		try {
 			const amount = await interaction.options.getInteger('amount')
 
+			await interaction.deferReply()
+			await interaction.editReply("Cleared")
 			if (interaction.options.getUser('user')) {
 				const target = await interaction.guild.members.fetch(await interaction.options.getUser('user').id)
 				const messagesMap = await interaction.channel.messages.fetch()
@@ -27,7 +31,7 @@ module.exports = {
 				userMessagesMap.forEach(userMsg => {
 					userMsg.delete()
 				})
-				interaction.reply(`**${amount}** ${target}'s messages have been deleted!`)
+				await interaction.editReply(`**${amount}** ${target}'s messages have been deleted!`)
 			}
 			else {
 				if (!amount) return interaction.reply("please enter the number of messages you want to clear");
@@ -39,8 +43,8 @@ module.exports = {
 						interaction.channel.send(e.interaction)
 					});
 				});
-
-				interaction.reply(`**${amount}** messages have been deleted!`)
+				await wait(2000)
+				await interaction.channel.send(`**${amount}** messages have been deleted!`)
 			}
 		} catch (e) {
 			require(`../../handlers/ErrorHandler.js`)(client, interaction, Discord, e, this.name)

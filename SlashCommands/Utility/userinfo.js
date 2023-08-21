@@ -11,11 +11,14 @@ module.exports = {
 
 	async execute(client, interaction, Discord) {
 		try {
+			let target
 			const user = interaction.options.getUser('user')
-			let target = interaction.guild.members.cache.get(user.id);
-			if (!target) {
+			if (!user) {
 				target = interaction.member
+			} else {
+				target = interaction.guild.members.cache.get(user.id);
 			}
+
 			memberRoles = target._roles
 			mentionedRoles = ""
 			memberTeams = ""

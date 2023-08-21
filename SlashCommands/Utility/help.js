@@ -20,11 +20,12 @@ module.exports = {
 			const commandFolders = fs
 				.readdirSync('SlashCommands/')
 				.filter(file => file.endsWith(''))
-			const menu = new Discord.SelectMenuBuilder()
+			const menu = new Discord.StringSelectMenuBuilder()
 				.setCustomId(`Help`)
 				.setPlaceholder('Select Module')
 			const requestedCommand = interaction.options.getString('command')
-			let commands = []
+			const allModuleCommands = []
+
 			for (const folder of commandFolders) {
 				const { Module, Description, Commands } = require(`../../SlashCommands/${folder}/ModuleInfo.js`)
 				embedMsg.addFields(
@@ -32,23 +33,29 @@ module.exports = {
 						{ name: Module, value: Description },
 					]
 				)
-				commands = Commands
+				allModuleCommands.push(Commands)
 				menu.addOptions({ label: `${Module}`, value: `${Module}` })
 			}
+
+			let commandInfo
 			if (requestedCommand) {
-				const commandInfo = commands.filter((command) => {
-					if (command.Name === requestedCommand) return command
-				})[0]
+				for (let i = 0; i < allModuleCommands.length; i++) {
+					const moduleCommands = allModuleCommands[i]
+					commandInfo = moduleCommands.filter(command => command.Name === requestedCommand)
+					if (commandInfo.length > 0) { break } else { continue }
+				}
+
+				if (commandInfo.length <= 0) return interaction.reply("Command not found!\nuse /help to get list of commands.")
 
 				const embedMsg = new Discord.EmbedBuilder()
 					.setTitle("Help")
 					.setColor('#00ff00')
 					.addFields(
 						[
-							{ name: 'Command', value: commandInfo.Name },
-							{ name: 'Description', value: commandInfo.Description },
-							{ name: 'Syntax', value: commandInfo.Syntax },
-							{ name: 'Permission', value: commandInfo.Permission },
+							{ name: 'Command', value: commandInfo[0].Name },
+							{ name: 'Description', value: commandInfo[0].Description },
+							{ name: 'Syntax', value: commandInfo[0].Syntax },
+							{ name: 'Permission', value: commandInfo[0].Permission },
 						]
 					)
 
@@ -63,7 +70,7 @@ module.exports = {
 				return interaction.reply({ embeds: [embedMsg], ephemeral: true });
 
 		} catch (e) {
-			require(`../handlers/ErrorHandler.js`)(client, interaction, Discord, e, this.name)
+			require(`../../handlers/ErrorHandler.js`)(client, interaction, Discord, e, this.name)
 		}
 	}
 }

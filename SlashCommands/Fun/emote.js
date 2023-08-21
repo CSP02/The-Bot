@@ -23,7 +23,7 @@ module.exports = {
 				const msg = await interaction.channel.messages.fetch(replyMsg.split('/')[replyMsg.split('/').length - 1])
 				const emoji = await interaction.client.emojis.cache.find(emo => emo.name === emoteReq)
 				await msg.reply(`${emoji} sent by ${await interaction.user}`).catch(console.error)
-				await interaction.reply({ content: "Reaction sent!", ephimeral: true }).catch(console.error)
+				await interaction.reply({ content: "Reaction sent!", ephemeral: true }).catch(console.error)
 			} else {
 				let emote = await interaction.client.emojis.cache.find(emo => emo.name === emoteReq)
 				if (emote) {

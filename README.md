@@ -1,14 +1,11 @@
 # The-Bot
 ![The-Bot](Resources/The-Bot-logo.png "The-Bot")
+
 ![issues](https://img.shields.io/github/issues/Chandra-sekhar-pilla/The-Bot)
 ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/The-Bot)
 ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/The-Bot)
 ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/The-Bot)
-![version](https://img.shields.io/badge/Version-4.0.1-green)
-
-
-> The default prefix is "!".
-(Prefix is same for every Guild/Server will release an update to make it able to change for different guilds.)
+![version](https://img.shields.io/badge/Version-4.1.1-green)
 
 * It is a discord bot for moderation.
 
@@ -18,31 +15,11 @@
 
 * Use !help to get the commands you can use.
 
-### Basic commands (Not all):
-
-Command 	|  	Alias	|    Task    | Permission
----------- 	|  	-----	|    ----    | ----------
-help		| -	| Displays the commands you can use | @everyone
-serverinfo	| si | Displays the information about the server | @everyone
-userinfo	| ui | Displays the information of mentioned user if not mentioned Displays the info about you | @everyone
-ping 		| - | Displays the current speed or latency of the bot | @everyone
-github 		| gh | Sends a link of this Bot's repository | @everyone
-removerole 	| remove, rr | removes a role from a user | @everyone
-role 		| - | assigns the given role 		| @everyone
-kick 		| - | Kicks the mentioned member 	| @staff
-ban 		| - | Banes the mentioned member 	| @staff
-mute 		| - | Mutes the mentioned member 	| @staff
-deleteinfraction | di, delinfr | Deletes the infraction with infraction id specified |  @staff
-clear 		| - | Clears the given number of messages including the bot's message | @staff
-unmute 		| - | unmutes the mentioned member 	| @staff
-warn 		| - | warns the mentioned member 	| @staff
-infraction 	| infr, wi | replies with the warning of the given infraction ID | @staff
-
 > Inorder to know more about the commands join my discord server.
 ### Version Info:
-* Added Slash Commands (a few but will release a minor release after adding more slash commands),
-* Added error handling which sends a embed message to the channel describing the error,
-* Refined interactionCreate which accepts the slash commands interaction.
+* Fixed most of the bugs.
+* Added "tex" command which can render the tex markdown.
+* Now The-Bot will log the login timestamps into a json file.
 
 ### Reference for graph API
 * The API is developed by [@Denzven](https://github.com/denzven) in python. For more information about examples visit [Pythonwhere](https://denzven.pythonanywhere.com/) 
@@ -58,8 +35,8 @@ infraction 	| infr, wi | replies with the warning of the given infraction ID | @
 ```
 Example:
 You:
-!ping
-The bot:
+/ping
+@The-bot
 Present heartbeat of the bot is 42ms.
 ```
 #### License:

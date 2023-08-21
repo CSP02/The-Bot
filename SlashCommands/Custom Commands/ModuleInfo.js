@@ -43,6 +43,18 @@ module.exports = {
             Description: 'Send the cdn link of toggler.js.',
             Syntax: '/togglerjs',
             Permission: 'Everyone',
+        },
+        {
+            Name: 'buildtex',
+            Description: 'Sends an tex rendered rendered image.',
+            Syntax: '/buildtex <tex_input>\nFor more details visit https://katex.org/docs/support_table.html',
+            Permission: 'Everyone'
+        },
+        {
+            Name: 'topic',
+            Description: 'Sends a topic to chat when chat is inactive',
+            Syntax: '/topic',
+            Permission: 'Everyone'
         }
     ]
 }

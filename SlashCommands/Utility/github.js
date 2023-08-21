@@ -6,6 +6,6 @@ module.exports = {
         .setDescription('Get the github link of this bot'),
 
     async execute(client, interaction, Discord) {
-        interaction.reply({ content: 'https://github.com/Chandra-sekhar-pilla/The-Bot-v2.0.0' });
+        interaction.reply({ content: '[The-Bot github repository](https://github.com/CSP02/The-Bot)' });
     }
 }

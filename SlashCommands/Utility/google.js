@@ -7,6 +7,6 @@ module.exports = {
         .setDescription('Macro which sends google search link'),
 
     execute(client, interaction, Discord) {
-        interaction.reply("Sounds like something <https://www.google.com/> would know!")
+        interaction.reply("Sounds like something [google](<https://www.google.com/>) would know!")
     }
 }

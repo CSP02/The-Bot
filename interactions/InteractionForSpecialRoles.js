@@ -1,6 +1,7 @@
+const { PermissionsBitField } = require('discord.js');
 module.exports = {
 	interactTo: ['Little Drummer Boy', 'Rudolph', 'Snowman', 'Santa claus', 'Christmas Elve'],
-	permissions: ['VIEW_CHANNEL'],
+	permissions: [PermissionsBitField.Flags],
 	async execute(client, interaction, Discord) {
 		try {
 			const customId = interaction.customId
@@ -9,27 +10,27 @@ module.exports = {
 				case 'Little Drummer Boy':
 					myRole = interaction.guild.roles.cache.find(role => role.name === customId);
 					interaction.member.roles.add(myRole)
-					interaction.update({content:`You are now ${myRole.name}`, components:[]})
+					interaction.update({ content: `You are now ${myRole.name}`, components: [] })
 					break
 				case 'Rudolph':
 					myRole = interaction.guild.roles.cache.find(role => role.name === customId);
 					interaction.member.roles.add(myRole)
-					interaction.update({content:`You are now ${myRole.name}`, components:[]})
+					interaction.update({ content: `You are now ${myRole.name}`, components: [] })
 					break
 				case 'Christmas Elve':
 					myRole = interaction.guild.roles.cache.find(role => role.name === customId);
 					interaction.member.roles.add(myRole)
-					interaction.update({content:`You are now ${myRole.name}`, components:[]})
+					interaction.update({ content: `You are now ${myRole.name}`, components: [] })
 					break
 				case 'Snowman':
 					myRole = interaction.guild.roles.cache.find(role => role.name === customId);
 					interaction.member.roles.add(myRole)
-					interaction.update({content:`You are now ${myRole.name}`, components:[]})					
+					interaction.update({ content: `You are now ${myRole.name}`, components: [] })
 					break
 				case 'Santa claus':
 					myRole = interaction.guild.roles.cache.find(role => role.name === customId);
 					interaction.member.roles.add(myRole)
-					interaction.update({content:`You are now ${myRole.name}`, components:[]})
+					interaction.update({ content: `You are now ${myRole.name}`, components: [] })
 					break
 				default:
 					return

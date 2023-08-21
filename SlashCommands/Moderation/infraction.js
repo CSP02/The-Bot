@@ -28,10 +28,11 @@ module.exports = {
 					else {
 						let infrIds = ""
 						if (infractionId) {
-							const warnings = results.warnings.filter((warning) => {
-								return warning.infrID === infractionId
+							const warnings = results.warnings.filter(warning => {
+								if (warning.infrID === infractionId)
+									return warning
 							})
-
+							if (warnings.length <= 0) return interaction.reply("Infraction not found for the given id!")
 							embedMsg.setTitle('Infraction')
 								.setColor('#ff0000')
 								.setFooter({ text: `Infraction ID: ${infractionId}` })
@@ -46,11 +47,10 @@ module.exports = {
 							const warnings = results.warnings.filter((warning) => {
 								return warning.userID === `${mentionedUser.id}`
 							})
-
+							// if(warnings.length <= 0) return interaction.reply("Infraction not found for this user!")
 							warnings.forEach(warning => {
 								infrIds += `${warning.infrID}, `
 							})
-
 							embedMsg.setTitle('Infraction')
 								.setColor('#ff0000')
 								.setFooter({ text: `Infractions of user ${mentionedUser}` })

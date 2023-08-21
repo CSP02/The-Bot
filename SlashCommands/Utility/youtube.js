@@ -6,6 +6,6 @@ module.exports = {
     .setDescription('Macro which sends youtube link'),
 
   async execute(client, interaction, Discord) {
-    interaction.reply("You can learn more by watching tutorials\n<https://www.youtube.com/> ")
+    interaction.reply("You can learn more by watching tutorials\n[YouTube](<https://www.youtube.com/>)")
   }
 }
