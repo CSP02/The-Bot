@@ -1,11 +1,11 @@
 # The-Bot
-![The-Bot](Resources/The-Bot-logo.png "The-Bot")
+![The-Bot](Resources/The-Botv5_gradient_logo.png "The-Bot")
 
-![issues](https://img.shields.io/github/issues/Chandra-sekhar-pilla/The-Bot)
-![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/The-Bot)
-![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/The-Bot)
-![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/The-Bot)
-![version](https://img.shields.io/badge/Version-4.1.1-green)
+![issues](https://img.shields.io/github/issues/CSP02/The-Bot)
+![forks](https://img.shields.io/github/forks/CSP02/The-Bot)
+![stars](https://img.shields.io/github/stars/CSP02/The-Bot)
+![license](https://img.shields.io/github/license/CSP02/The-Bot)
+![version](https://img.shields.io/badge/Version-5-green)
 
 * It is a discord bot for moderation.
 
@@ -16,29 +16,7 @@
 * Use !help to get the commands you can use.
 
 > Inorder to know more about the commands join my discord server.
-### Version Info:
-* Fixed most of the bugs.
-* Added "tex" command which can render the tex markdown.
-* Now The-Bot will log the login timestamps into a json file.
 
-### Reference for graph API
-* The API is developed by [@Denzven](https://github.com/denzven) in python. For more information about examples visit [Pythonwhere](https://denzven.pythonanywhere.com/) 
-* [Docs for this API](https://denzven.github.io/Denzven-Graphing-Api/).
-* To use this API in your discord bot see the graph command or you can view code [here](https://denzven.github.io/Denzven-Graphing-Api-Bot
-)
-
-### Features which may available for next version:
-* Will try to add createcustomcommand(ccc) command to create commands with the help of bot.
-* Will Fix the bugs in current version if it has any (please inform if there are any bugs in present code by creating an issue).
-
-### Command usage:
-```
-Example:
-You:
-/ping
-@The-bot
-Present heartbeat of the bot is 42ms.
-```
 #### License:
 
 This project is licensed under a MIT license.
